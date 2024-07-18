@@ -1,0 +1,39 @@
+{{ header }}
+<div id="content">
+  <div class="container-fluid">
+    <br/>
+    <br/>
+    <div class="row justify-content-sm-center">
+      <div class="col-sm-10 col-md-8 col-lg-5">
+        <div id="login" class="card card-danger">
+          <div class="logo card-header text-center">
+						<img src="view/image/logo.svg" alt="{{ heading_title }}" title="{{ heading_title }}"/></a>      
+					</div>
+          <div class="card-body">
+ 						<div class="row justify-content-center">{{ heading_title }}<br/><br/></div>
+            <form id="form-forgotten" action="{{ reset }}" method="post" data-oc-toggle="ajax">
+              <p>{{ text_password }}</p>
+              <div class="mb-3">
+                <div class="input-group">
+                  <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-password" class="form-control"/>
+                  <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="input-group">
+                  <input type="password" name="confirm" value="" placeholder="{{ entry_confirm }}" id="input-confirm" class="form-control"/>
+                  <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                </div>
+              </div>
+              <div class="text-end">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> {{ button_save }}</button>
+                <a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

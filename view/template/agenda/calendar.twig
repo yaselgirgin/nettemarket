@@ -1,0 +1,438 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-body" id='calendar'>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-event" class="modal modal-lg show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger"><i class="far fa-calendar-check"></i> <span id="evet-title">Takvime Ekle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+			<div class="modal-body">
+				<div class="row mb-2">
+					<label for="title" class="col-sm-2 col-form-label">Başlık</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="title">
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="data_type" class="col-sm-2 col-form-label">Kayıt Türü</label>
+					<div class="col-sm-10">
+						<input type="radio" class="btn-check" name="options-outlined" id="data_type_event" autocomplete="off" checked>
+						<label class="btn btn-outline-primary" for="data_type_event">Etkinlik</label>
+						<input type="radio" class="btn-check" name="options-outlined" id="data_type_task" autocomplete="off">
+						<label class="btn btn-outline-primary" for="data_type_task">Görev</label>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="description" class="col-sm-2 col-form-label">Açıklama</label>
+					<div class="col-sm-10">
+						 <textarea class="form-control" id="description" rows="5"></textarea>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="date_start" class="col-sm-2 col-form-label">Başlangıç</label>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<input type="date" class="form-control" id="date_start">
+					</div>
+					<div class="col-lg-2 col-md-3 col-sm-4">
+						<input type="time" class="form-control" id="time_start">
+					</div>
+					<div class="col-sm-2 ">
+						<div class="form-check pt-2">
+							<input class="form-check-input" type="checkbox" id="all_day" checked>
+							<label class="form-check-label" for="all_day">
+								Tüm Gün
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="date_start" class="col-sm-2 col-form-label">Bitiş</label>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<input type="date" class="form-control" id="date_end">
+					</div>
+					<div class="col-lg-2 col-md-3 col-sm-4">
+						<input type="time" class="form-control" id="time_end">
+					</div>
+					<div class="col-sm-2 ">
+						<div class="form-check pt-2">
+							<input class="form-check-input" type="checkbox" id="all_day2" checked>
+							<label class="form-check-label" for="all_day2">
+								Tüm Gün
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="add_guest" class="col-sm-2 col-form-label">Davetli Ekle</label>
+					<div class="col-sm-7 ">
+						 <select class="form-select" id="add_guest">
+							<option> </option>
+							<option value="1">One</option>
+							<option value="2">Two</option>
+							<option value="3">Three</option>
+						</select>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label for="attach" class="col-sm-2 col-form-label">Dosya Ekle</label>
+					<div class="col-sm-7">
+							<input class="form-control d-none" type="file" id="attach">
+							<button type="button" id="button-upload" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Dosya Seç</button>
+					</div>
+				</div>
+				 
+
+				<div class="text-end">
+					<button type="button" id="button-install" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> {{ button_delete }}</button>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		locale: '{{ code }}',
+		themeSystem: 'bootstrap5',
+		{% if open_hours|length > 0 %} 
+		businessHours: [
+		{% for open_hour in open_hours %}
+			{
+			daysOfWeek: [{% for day in open_hour.days %}{% if day|length > 0 %}{{ loop.index }},{% endif %}{% endfor %}],
+			startTime: '{{ open_hour.open }}', 
+			endTime: '{{ open_hour.close }}'
+			},
+		{% endfor %}
+		],
+		{% endif %}
+		eventTimeFormat: {
+			hour: '2-digit',
+			minute: '2-digit'
+		},
+		nowIndicator : true,
+		navLinks : true,
+		headerToolbar: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'dayGridMonth,dayGridWeek,timeGridDay,listMonth'
+		},
+		initialView: '{{ config_calendar_view }}',
+		editable: true,
+		selectable: true,
+		dayMaxEvents: true, // allow "more" link when too many events
+		selectMirror: true,
+		select: function(arg) {
+			
+			$('#modal-event #date_start').val(moment(arg.startStr).format('YYYY-MM-DD'));
+			$('#modal-event #date_end').val(moment(arg.endStr).format('YYYY-MM-DD'));
+			$('#modal-event #time_start').val(moment(arg.startStr).format('HH:mm'));
+			$('#modal-event #time_end').val(moment(arg.endStr).format('HH:mm'));
+
+			$('#modal-event').modal('show');
+			
+			console.log(arg)
+			/*var title = prompt('Event Title:');
+			if (title) {
+				calendar.addEvent({
+					title: title,
+					start: arg.start,
+					end: arg.end,
+					allDay: arg.allDay
+				})
+			}
+			*/
+			calendar.unselect()
+
+		},
+		eventClick: function(arg) {
+			console.log(arg)
+			$('#modal-event #evet-title').html(arg.event._def.title);
+			$('#modal-event #evet-description').html(arg.event._def.extendedProps.description);
+			$('#modal-event').modal('show');
+
+			$('#modal-event #date_start').val(moment(arg.event._def.startStr).format('YYYY-MM-DD'));
+			$('#modal-event #date_end').val(moment(arg.event._def.endStr).format('YYYY-MM-DD'));
+			$('#modal-event #time_start').val(moment(arg.event._def.startStr).format('HH:mm'));
+			$('#modal-event #time_end').val(moment(arg.event._def.endStr).format('HH:mm'));				
+			/*
+
+			$('#modal-event #event-url').attr('href',arg.url);
+			if (confirm('Are you sure you want to delete this event?')) {
+				arg.event.remove()
+			}*/
+		},
+		eventClassNames: function(arg) {
+			return arg.event.extendedProps.icon
+		},
+		events: [
+			{% if public_holidays|length > 0 %}
+			{% for public_holiday in public_holidays %}
+			{title: '{{ public_holiday.name }}',rrule: {dtstart: '{{ public_holiday.date }}',freq: 'yearly',},icon: 'flag',display: 'background',backgroundColor	: '#ff9f89'},
+			{% endfor %}
+			{% endif %}
+			{% if religious_holiday_qurban %}
+			{title: '{{ qurban.title }}',rrule: {dtstart: '{{ qurban.start_date }}',freq: 'daily',count: '4'},icon: 'cow',display: 'background',backgroundColor	: '#ff9f89'},
+			{% endif %}
+			{% if religious_holiday_ramadan %}
+			{title: '{{ ramadan.title }}',rrule: {dtstart: '{{ ramadan.start_date }}',freq: 'daily',count: '3'},icon: 'moon',display: 'background',backgroundColor	: '#ff9f89'},
+			{% endif %}
+			
+
+
+			
+			
+			{
+				title: 'Günlük Tekrarlı Etkinlik',
+				description: 'description günlük tekrar açıklması',
+				rrule: {
+					dtstart: '2024-07-18T20:00:00',
+					//dtstart: '2024-07-01',
+					interval: 10, //atlama
+					count: 20,
+					freq: 'daily'
+				},
+				classNames: 'classekle',
+				color: 'yellow',
+				textColor: 'red',
+				backgroundColor	: 'orange'
+			},
+			{
+				title: 'Yıllık Tekrarlı Etkinlik',
+				description: 'Yasel Girgin doğum günü',
+				rrule: {
+					dtstart: '1979-07-28',
+					freq: 'yearly'
+				},
+				icon: 'cake-candle',
+				color: 'purple',
+			},
+			{
+				title: 'Zaman Aralıklı etkinlik',
+				start: '2024-07-17T15:30:00',
+				end: '2024-07-18T09:30:00',
+				icon: 'envelope',
+			},
+			/*
+			{
+				title: 'Haftalık Tekrarlı Etkinlik aa',
+				rrule: {
+					freq: 'weekly',
+					interval: 2, //atlama
+					byweekday: [ 'mo', 'fr' ],
+					dtstart: '2024-07-15T18:00:00',
+					until: '2025-08-01' // will also accept '20120201'
+				},
+				color: 'green',
+				backgroundColor: 'green',
+			},
+			{
+				title: 'Aylık Tekrarlı Etkinlik',
+				rrule: {
+					//dtstart: '2024-07-15T13:00:00',
+					dtstart: '2024-07-15',
+					count: 3,
+					freq: 'monthly'
+				},
+				color : 'green',
+			},
+			{
+				title: 'Tam gün etkinlik',
+				start: '2024-07-18',
+				color: 'navy',
+				icon: 'envelope',
+			},
+			{
+				title: 'deneme',
+				start: '2024-07-16T10:00:00',
+				end: '2024-07-16T11:00:00',
+				color : 'green',
+			},
+			{
+				title: '3 günlük etkinlik',
+				start: '2024-07-16',
+				end: '2024-07-19'
+			},
+			{
+				title: 'rrule tekrar',
+				rrule: {
+					freq: 'weekly',
+					dtstart: '2024-06-01'
+				},
+				exdate: ['2025-02-01'] // will also accept a single string
+			},			
+			{
+				groupId: 'blueEvents', // recurrent events in this group move together
+				title: 'Perşembe Tekrar',
+				daysOfWeek: [ '4' ]
+			},
+			{
+				title: 'Çarşamba Tekrar',
+				daysOfWeek: [ '3' ], // these recurrent events move separately
+				startTime: '11:00:00',
+				endTime: '11:30:00',
+				color: 'red'
+			},
+			
+			{
+				title: 'Long Event',
+				start: '2024-07-07',
+				end: '2024-07-10'
+			},
+			{
+				groupId: 999,
+				title: 'Repeating Event',
+				start: '2024-07-15T16:01:00'
+			},
+			{
+				groupId: 999,
+				title: 'Repeating Event',
+				start: '2024-07-17T16:01:00'
+			},
+			{
+				title: 'Conference',
+				start: '2024-07-11',
+				end: '2024-07-13'
+			},
+			{
+				title: 'Meeting',
+				start: '2024-07-12T10:30:00',
+				end: '2024-07-12T12:30:00'
+			},
+			{
+				title: 'Lunch',
+				start: '2024-07-12T12:00:00'
+			},
+			{
+				title: 'Meeting',
+				start: '2024-07-12T14:30:00'
+			},
+			{
+				title: 'Happy Hour',
+				start: '2024-07-12T17:30:00'
+			},
+			{
+				title: 'Dinner',
+				start: '2024-07-12T20:00:00'
+			},
+			{
+				title: 'Birthday Party',
+				start: '2024-07-13T07:00:00'
+			},
+			{
+				title: 'Click for Google',
+				url: 'http://google.com/',
+				start: '2024-07-28'
+			}
+			*/
+		],
+	});
+
+	calendar.render();
+});
+
+</script>
+<script type="text/javascript"><!--
+// Upload
+$('#button-upload').on('click', function() {
+    $('#form-upload').remove();
+
+    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="upload" /></form>');
+
+    $('#form-upload input[name=\'upload\']').trigger('click');
+
+    $('#form-upload input[name=\'upload\']').on('change', function() {
+        if ((this.files[0].size / 1024) > {{ config_file_max_size }}) {
+            $(this).val('');
+
+            alert('{{ error_upload_size }}');
+        }
+    });
+
+    if (typeof timer != 'undefined') {
+        clearInterval(timer);
+    }
+
+    timer = setInterval(function() {
+        if ($('#form-upload input[name=\'upload\']').val() !== '') {
+            clearInterval(timer);
+
+            $.ajax({
+                url: 'index.php?route=tool/backup.upload&user_token={{ user_token }}',
+                type: 'post',
+                dataType: 'json',
+                data: new FormData($('#form-upload')[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#button-upload').button('loading');
+                },
+                complete: function() {
+                    $('#button-upload').button('reset');
+                },
+                success: function(json) {
+                    $('.alert-dismissible').remove();
+
+                    if (json['error']) {
+                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                    }
+
+                    if (json['success']) {
+                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+
+                        $('#history').load('index.php?route=tool/backup.history&user_token={{ user_token }}');
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    }, 500);
+});
+</script>
+<style>
+.cake-candle .fc-event-title:before {
+  font-family: FontAwesome;  
+	content: "\f1fd";
+	padding: 0 5px 0 2px;
+}
+.envelope .fc-event-title:before {
+  font-family: FontAwesome;  
+	content: "\f0e0";
+	padding: 0 5px 0 2px;
+}
+.cow .fc-event-title:before {
+  font-family: FontAwesome;  
+	content: "\f6c8";
+	padding: 0 5px 0 2px;
+}
+.moon .fc-event-title:before {
+  font-family: FontAwesome;  
+	content: "\f186";
+	padding: 0 5px 0 2px;
+}
+.flag .fc-event-title:before {
+  font-family: FontAwesome;  
+	content: "\f2b4";
+	padding: 0 5px 0 2px;
+}
+
+</style>
+
+{{ footer }}

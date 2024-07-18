@@ -1,0 +1,927 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="float-end">
+        {% if developer_status %}
+        <button type="button" id="button-setting" data-bs-toggle="tooltip" title="{{ button_developer }}" class="btn btn-info"><i class="fa-solid fa-cog"></i></button>
+        {% endif %}
+        <button type="submit" form="form-setting" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
+      </div>
+      <h1>{{ heading_title }}</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header"><i class="fa-solid fa-pencil"></i> {{ text_edit }}</div>
+      <div class="card-body">
+        <form id="form-setting" action="{{ save }}" method="post" data-oc-toggle="ajax">
+          <ul class="nav nav-tabs">
+            <li class="nav-item"><a href="#tab-company" data-bs-toggle="tab" class="nav-link active">{{ tab_company }}</a></li>
+            <li class="nav-item"><a href="#tab-local" data-bs-toggle="tab" class="nav-link">{{ tab_local }}</a></li>
+            <li class="nav-item"><a href="#tab-option" data-bs-toggle="tab" class="nav-link">{{ tab_option }}</a></li>
+            <li class="nav-item"><a href="#tab-image" data-bs-toggle="tab" class="nav-link">{{ tab_image }}</a></li>
+            <li class="nav-item"><a href="#tab-mail" data-bs-toggle="tab" class="nav-link">{{ tab_mail }}</a></li>
+            <li class="nav-item"><a href="#tab-server" data-bs-toggle="tab" class="nav-link">{{ tab_server }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-company" class="tab-pane active">
+              <div class="row mb-3 required">
+                <label for="input-name" class="col-sm-2 col-form-label">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_name" value="{{ config_name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control"/>
+                  <div id="error-name" class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="row mb-3 required">
+                <label for="input-owner" class="col-sm-2 col-form-label">{{ entry_owner }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_owner" value="{{ config_owner }}" placeholder="{{ entry_owner }}" id="input-owner" class="form-control"/>
+                  <div id="error-owner" class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="row mb-3 required">
+                <label for="input-address" class="col-sm-2 col-form-label">{{ entry_address }}</label>
+                <div class="col-sm-10">
+                  <textarea name="config_address" rows="3" placeholder="{{ entry_address }}" id="input-address" class="form-control">{{ config_address }}</textarea>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-zone" class="col-sm-2 col-form-label">{{ entry_zone }}</label>
+                <div class="col-sm-10">
+                  <select name="config_zone_id" id="input-zone" class="form-select"></select>
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <label for="input-country" class="col-sm-2 col-form-label">{{ entry_country }}</label>
+                <div class="col-sm-10">
+                  <select name="config_country_id" id="input-country" class="form-select">
+                    {% for country in countries %}
+                      <option value="{{ country.country_id }}"{% if country.country_id == config_country_id %} selected{% endif %}>{{ country.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-geocode" class="col-sm-2 col-form-label">{{ entry_geocode }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_geocode" value="{{ config_geocode }}" placeholder="{{ entry_geocode }}" id="input-geocode" class="form-control"/>
+                  <div class="form-text">{{ help_geocode }}</div>
+                </div>
+              </div>
+              <div class="row mb-3 required">
+                <label for="input-email" class="col-sm-2 col-form-label">{{ entry_email }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_email" value="{{ config_email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
+                  <div id="error-email" class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-telephone" class="col-sm-2 col-form-label">{{ entry_telephone }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_telephone" value="{{ config_telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control"/>
+                  <div id="error-telephone" class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-gsm" class="col-sm-2 col-form-label">{{ entry_gsm }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_gsm" value="{{ config_gsm }}" placeholder="{{ entry_gsm }}" id="input-gsm" class="form-control"/>
+                  <div id="error-gsm" class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-logo" class="col-sm-2 col-form-label">{{ entry_logo }}</label>
+                <div class="col-sm-10">
+                  <div class="border rounded d-block" style="max-width: 300px;">
+                    <img src="{{ logo }}" alt="" title="" id="thumb-logo" data-oc-placeholder="{{ placeholder }}" class="img-fluid"/> <input type="hidden" name="config_logo" value="{{ config_logo }}" id="input-logo"/>
+                    <div class="d-grid">
+                      <button type="button" data-oc-toggle="image" data-oc-target="#input-logo" data-oc-thumb="#thumb-logo" class="btn btn-primary rounded-0"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
+                      <button type="button" data-oc-toggle="clear" data-oc-target="#input-logo" data-oc-thumb="#thumb-logo" class="btn btn-warning rounded-0"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="open-hours" class="col-sm-2 col-form-label">{{ entry_open }}</label>
+                <div class="col-sm-10">
+                  <div class="table-responsive">
+                    <table id="open-hours" class="table table-hover">
+                      <thead>
+                        <tr>
+                          <td class="text-center col-sm-1">{{ column_open }}</td>
+                          <td class="text-center col-sm-1">{{ column_close }}</td>
+                          <td class="text-start col-sm-9" colspan="7">{{ column_days }}</td>
+                          <td class="col-sm-1"></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% set hours_row = 0 %}
+                        {% for open_hour in config_open_hours %}
+                          <tr id="hours-row-{{ hours_row }}">
+                            <td class="text-center"><input type="time" name="config_open_hours[{{ hours_row }}][open]" value="{{ open_hour.open }}" class="form-control"/></td>
+                            <td class="text-center"><input type="time" name="config_open_hours[{{ hours_row }}][close]" value="{{ open_hour.close }}" class="form-control"/></td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][1]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][1]" value="1" class="form-check-input"{% if open_hour.days.1 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_monday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][2]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][2]" value="1" class="form-check-input"{% if open_hour.days.2 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_tuesday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][3]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][3]" value="1" class="form-check-input"{% if open_hour.days.3 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_wednesday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][4]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][4]" value="1" class="form-check-input"{% if open_hour.days.4 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_thursday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][5]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][5]" value="1" class="form-check-input"{% if open_hour.days.5 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_friday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][6]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][6]" value="1" class="form-check-input"{% if open_hour.days.6 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_saturday }}</div>
+                                </div>
+                            </td>
+                            <td class="text-start">
+                                <div class="col-sm-12">
+                                  <div class="form-check form-switch form-switch-lg">
+                                    <input type="hidden" name="config_open_hours[{{ hours_row }}][days][7]" value=""/>
+                                    <input type="checkbox" name="config_open_hours[{{ hours_row }}][days][7]" value="1" class="form-check-input"{% if open_hour.days.7 %} checked{% endif %}/>
+                                  </div>
+                                  <div class="form-text">{{ text_sunday }}</div>
+                                </div>                        
+                            </td>
+                            <td class="text-end"><button type="button" onclick="$('#hours-row-{{ hours_row }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+                          </tr>
+                          {% set hours_row = hours_row + 1 %}
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="9"><div class="form-text">{{ help_open }}</div></td>
+                          <td class="text-end"><button type="button" id="button-hours-row" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              {% if locations %}
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_location }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-control" style="height: 150px; overflow: auto;">
+                      {% for location in locations %}
+                        <div class="form-check">
+                          <input type="checkbox" name="config_location[]" value="{{ location.location_id }}" id="input-location-{{ location.location_id }}" class="form-check-input"{% if location.location_id in config_location %} checked{% endif %}/> <label for="input-location-{{ location.location_id }}" class="form-check-label">{{ location.name }}</label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <div class="form-text">{{ help_location }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div id="tab-local" class="tab-pane">
+              <div class="row mb-3">
+                <label for="input-language-admin" class="col-sm-2 col-form-label">{{ entry_language_admin }}</label>
+                <div class="col-sm-10">
+                  <select name="config_language_admin" id="input-language-admin" class="form-select">
+                    {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == config_language_admin %} selected{% endif %}>{{ language.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-timezone" class="col-sm-2 col-form-label">{{ entry_timezone }}</label>
+                <div class="col-sm-10">
+                  <select name="config_timezone" id="input-timezone" class="form-select">
+                    {% for timezone in timezones %}
+                      <option value="{{ timezone.value }}"{% if timezone.value == config_timezone %} selected{% endif %}>{{ timezone.text }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-currency" class="col-sm-2 col-form-label">{{ entry_currency }}</label>
+                <div class="col-sm-10">
+                  <select name="config_currency" id="input-currency" class="form-select">
+                    {% for currency in currencies %}
+                      <option value="{{ currency.code }}"{% if currency.code == config_currency %} selected{% endif %}>{{ currency.title }}</option>
+                    {% endfor %}
+                  </select>
+                  <div class="form-text">{{ help_currency }}</div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-currency-engine" class="col-sm-2 col-form-label">{{ entry_currency_engine }}</label>
+                <div class="col-sm-10">
+                  <select name="config_currency_engine" id="input-currency-engine" class="form-select">
+                    {% for currency_engine in currency_engines %}
+                      <option value="{{ currency_engine.value }}"{% if currency_engine.value == config_currency_engine %} selected{% endif %}>{{ currency_engine.text }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">{{ entry_currency_auto }}</label>
+                <div class="col-sm-10">
+                  <div class="form-check form-switch form-switch-lg">
+                    <input type="hidden" name="config_currency_auto" value="0"/>
+                    <input type="checkbox" name="config_currency_auto" value="1" id="input-currency-auto" class="form-check-input"{% if config_currency_auto %} checked{% endif %}/>
+                  </div>
+                  <div class="form-text">{{ help_currency_auto }}</div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-length-class" class="col-sm-2 col-form-label">{{ entry_length_class }}</label>
+                <div class="col-sm-10">
+                  <select name="config_length_class_id" id="input-length-class" class="form-select">
+                    {% for length_class in length_classes %}
+                      <option value="{{ length_class.length_class_id }}"{% if length_class.length_class_id == config_length_class_id %} selected{% endif %}>{{ length_class.title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="input-weight-class" class="col-sm-2 col-form-label">{{ entry_weight_class }}</label>
+                <div class="col-sm-10">
+                  <select name="config_weight_class_id" id="input-weight-class" class="form-select">
+                    {% for weight_class in weight_classes %}
+                      <option value="{{ weight_class.weight_class_id }}"{% if weight_class.weight_class_id == config_weight_class_id %} selected{% endif %}>{{ weight_class.title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div id="tab-option" class="tab-pane">
+              <div class="accordion" id="accordion-option">
+                <div class="accordion-item">
+                  <h2 class="accordion-header"><button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-agenda">{{ text_agenda }}</button></h2>
+                  <div id="collapse-agenda" class="accordion-collapse collapse" data-bs-parent="#accordion-option">
+                    <div class="accordion-body">
+                      
+                      <div class="row mt-2 mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_calendar_view }}</label>
+                        <div class="col-sm-10">
+                          <select name="config_calendar_view" id="input-tax-default" class="form-select">
+                            <option value="dayGridMonth"{% if config_calendar_view == 'dayGridMonth' %} selected{% endif %}>{{ text_dayGridMonth }}</option>
+                            <option value="dayGridWeek"{% if config_calendar_view == 'dayGridWeek' %} selected{% endif %}>{{ text_dayGridWeek }}</option>
+                            <option value="timeGridDay"{% if config_calendar_view == 'timeGridDay' %} selected{% endif %}>{{ text_timeGridDay }}</option>
+                            <option value="listMonth"{% if config_calendar_view == 'listMonth' %} selected{% endif %}>{{ text_listMonth }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                      <div class="row mt-2 mb-3">
+                        <label for="public-holidays" class="col-sm-2 col-form-label">{{ entry_public_holidays }}</label>
+                        <div class="col-sm-10">
+                          <div class="table-responsive">
+                            <table id="public-holidays" class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <td class="text-start col-sm-2">{{ column_date }}</td>
+                                  <td class="text-start col-sm-10">{{ column_name }}</td>
+                                  <td class="col-sm-1"></td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% set public_holiday_row = 0 %}
+                                {% for public_holiday in config_public_holidays %}
+                                  <tr id="public-holidays-row-{{ public_holiday_row }}">
+                                    <td class="text-start col-sm-2"><input type="date" name="config_public_holidays[{{ public_holiday_row }}][date]" value="{{ public_holiday.date }}" class="form-control"/></td>
+                                    <td class="text-start col-sm-10"><input type="text" name="config_public_holidays[{{ public_holiday_row }}][name]" value="{{ public_holiday.name }}" class="form-control"/></td>
+                                    <td class="text-end"><button type="button" onclick="$('#public-holidays-row-{{ public_holiday_row }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+                                  </tr>
+                                  {% set public_holiday_row = public_holiday_row + 1 %}
+                                {% endfor %}
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="2"><div class="form-text">{{ help_public_holidays }}</div></td>
+                                  <td class="text-end"><button type="button" id="button-public-holidays-row" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-2 mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_religious_holiday_qurban }}</label>
+                        <div class="col-sm-10">
+                          <div class="form-check form-switch form-switch-lg">
+                            <input type="hidden" name="config_religious_holiday_qurban" value="0"/>
+                            <input type="checkbox" name="config_religious_holiday_qurban" value="1" id="input-religious_holiday_qurban" class="form-check-input"{% if config_religious_holiday_qurban %} checked{% endif %}/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-2 mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_religious_holiday_ramadan }}</label>
+                        <div class="col-sm-10">
+                          <div class="form-check form-switch form-switch-lg">
+                            <input type="hidden" name="config_religious_holiday_ramadan" value="0"/>
+                            <input type="checkbox" name="config_religious_holiday_ramadan" value="1" id="input-religious_holiday_ramadan" class="form-check-input"{% if config_religious_holiday_ramadan %} checked{% endif %}/>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header"><button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-product">{{ text_product }}</button></h2>
+                  <div id="collapse-product" class="accordion-collapse collapse" data-bs-parent="#accordion-option">
+                    <div class="accordion-body">
+                      <div class="row mt-2 mb-3 required">
+                        <label for="input-product-description-length" class="col-sm-2 col-form-label">{{ entry_product_description_length }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="config_product_description_length" value="{{ config_product_description_length }}" placeholder="{{ entry_product_description_length }}" id="input-product-description-length" class="form-control"/>
+                          <div class="form-text">{{ help_product_description_length }}</div>
+                          <div id="error-product-description-length" class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="row mb-3 required">
+                        <label for="input-pagination-admin" class="col-sm-2 col-form-label">{{ entry_pagination_admin }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="config_pagination_admin" value="{{ config_pagination_admin }}" placeholder="{{ entry_pagination_admin }}" id="input-pagination-admin" class="form-control"/>
+                          <div class="form-text">{{ help_pagination }}</div>
+                          <div id="error-pagination-admin" class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="row mb-3 required">
+                        <label for="input-autocomplete-limit" class="col-sm-2 col-form-label">{{ entry_autocomplete_limit }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="config_autocomplete_limit" value="{{ config_autocomplete_limit }}" placeholder="{{ entry_autocomplete_limit }}" id="input-autocomplete-limit" class="form-control"/>
+                          <div class="form-text">{{ help_autocomplete_limit }}</div>
+                          <div id="error-autocomplete-limit" class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header"><button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-tax">{{ text_tax }}</button></h2>
+                  <div id="collapse-tax" class="accordion-collapse collapse" data-bs-parent="#accordion-option">
+                    <div class="accordion-body">
+                      <div class="row mt-2 mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_tax }}</label>
+                        <div class="col-sm-10">
+                          <div class="form-check form-switch form-switch-lg">
+                            <input type="hidden" name="config_tax" value="0"/>
+                            <input type="checkbox" name="config_tax" value="1" id="input-tax" class="form-check-input"{% if config_tax %} checked{% endif %}/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="input-tax-default" class="col-sm-2 col-form-label">{{ entry_tax_default }}</label>
+                        <div class="col-sm-10">
+                          <select name="config_tax_default" id="input-tax-default" class="form-select">
+                            <option value="">{{ text_none }}</option>
+                            <option value="shipping"{% if config_tax_default == 'shipping' %} selected{% endif %}>{{ text_shipping }}</option>
+                            <option value="payment"{% if config_tax_default == 'payment' %} selected{% endif %}>{{ text_payment }}</option>
+                          </select>
+                          <div class="form-text">{{ help_tax_default }}</div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header"><button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-checkout">{{ text_invoice }}</button></h2>
+                  <div id="collapse-checkout" class="accordion-collapse collapse" data-bs-parent="#accordion-option">
+                    <div class="accordion-body">
+                      <div class="row mt-2 mb-3">
+                        <label for="input-invoice-prefix" class="col-sm-2 col-form-label">{{ entry_invoice_prefix }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="config_invoice_prefix" value="{{ config_invoice_prefix }}" placeholder="{{ entry_invoice_prefix }}" id="input-invoice-prefix" class="form-control"/>
+                          <div class="form-text">{{ help_invoice_prefix }}</div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="input-order-status" class="col-sm-2 col-form-label">{{ entry_default_status }}</label>
+                        <div class="col-sm-10">
+                          <select name="config_process_status_id" id="input-order-status" class="form-select">
+                            {% for process_status in process_statuses %}
+                              <option value="{{ process_status.process_status_id }}"{% if process_status.process_status_id == config_process_status_id %} selected{% endif %}>{{ process_status.name }}</option>
+                            {% endfor %}
+                          </select>
+                          <div class="form-text">{{ help_invoice_status }}</div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_processing_status }}</label>
+                        <div class="col-sm-10">
+                          <div id="input-processing-status" class="form-control" style="height: 150px; overflow: auto;">
+                            {% for process_status in process_statuses %}
+                              <div class="form-check">
+                                <input type="checkbox" name="config_processing_status[]" value="{{ process_status.process_status_id }}" id="input-processing-status-{{ process_status.process_status_id }}" class="form-check-input"{% if process_status.process_status_id in config_processing_status %} checked{% endif %}/> <label for="input-processing-status-{{ process_status.process_status_id }}" class="form-check-label">{{ process_status.name }}</label>
+                              </div>
+                            {% endfor %}
+                          </div>
+                          <div class="form-text">{{ help_processing_status }}</div>
+                          <div id="error-processing-status" class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ entry_complete_status }}</label>
+                        <div class="col-sm-10">
+                          <div id="input-complete-status" class="form-control" style="height: 150px; overflow: auto;">
+                            {% for process_status in process_statuses %}
+                              <div class="form-check">
+                                <input type="checkbox" name="config_complete_status[]" value="{{ process_status.process_status_id }}" id="input-complete-status-{{ process_status.process_status_id }}" class="form-check-input"{% if process_status.process_status_id in config_complete_status %} checked{% endif %}/> <label for="input-complete-status-{{ process_status.process_status_id }}" class="form-check-label">{{ process_status.name }}</label>
+                              </div>
+                            {% endfor %}
+                          </div>
+                          <div class="form-text">{{ help_complete_status }}</div>
+                          <div id="error-complete-status" class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="tab-image" class="tab-pane">
+              <fieldset>
+                <legend>{{ text_image_size }}</legend>
+                <div class="row mb-3 required">
+                  <label for="input-image-default-width" class="col-sm-2 col-form-label">{{ entry_image_default }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-default" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_default_width" value="{{ config_image_default_width }}" placeholder="{{ entry_width }}" id="input-image-default-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_default_height" value="{{ config_image_default_height }}" placeholder="{{ entry_height }}" id="input-image-default-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-default" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-image-thumb-width" class="col-sm-2 col-form-label">{{ entry_image_thumb }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-thumb" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_thumb_width" value="{{ config_image_thumb_width }}" placeholder="{{ entry_width }}" id="input-image-thumb-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_thumb_height" value="{{ config_image_thumb_height }}" placeholder="{{ entry_height }}" id="input-image-thumb-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-thumb" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-image-popup-width" class="col-sm-2 col-form-label">{{ entry_image_popup }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-popup" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_popup_width" value="{{ config_image_popup_width }}" placeholder="{{ entry_width }}" id="input-image-popup-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_popup_height" value="{{ config_image_popup_height }}" placeholder="{{ entry_height }}" id="input-image-popup-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-popup" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-image-product-width" class="col-sm-2 col-form-label">{{ entry_image_product }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-product" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_product_width" value="{{ config_image_product_width }}" placeholder="{{ entry_width }}" id="input-image-product-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_product_height" value="{{ config_image_product_height }}" placeholder="{{ entry_height }}" id="input-image-product-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-product" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-image-additional-width" class="col-sm-2 col-form-label">{{ entry_image_additional }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-additional" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_additional_width" value="{{ config_image_additional_width }}" placeholder="{{ entry_width }}" id="input-image-additional-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_additional_height" value="{{ config_image_additional_height }}" placeholder="{{ entry_height }}" id="input-image-additional-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-additional" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-image-cart-width" class="col-sm-2 col-form-label">{{ entry_image_cart }}</label>
+                  <div class="col-sm-10">
+                    <div id="input-image-cart" class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_cart_width" value="{{ config_image_cart_width }}" placeholder="{{ entry_width }}" id="input-image-cart-width" class="form-control"/>
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="config_image_cart_height" value="{{ config_image_cart_height }}" placeholder="{{ entry_height }}" id="input-image-cart-height" class="form-control"/>
+                      </div>
+                    </div>
+                    <div id="error-image-cart" class="invalid-feedback"></div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div id="tab-mail" class="tab-pane">
+              <fieldset>
+                <legend>{{ text_general }}</legend>
+                <div class="row mb-3">
+                  <label for="input-mail-engine" class="col-sm-2 col-form-label">{{ entry_mail_engine }}</label>
+                  <div class="col-sm-10">
+                    <select name="config_mail_engine" id="input-mail-engine" class="form-select">
+                      <option value="">{{ text_none }}</option>
+                      <option value="mail"{% if config_mail_engine == 'mail' %} selected{% endif %}>{{ text_mail }}</option>
+                      <option value="smtp"{% if config_mail_engine == 'smtp' %} selected{% endif %}>{{ text_smtp }}</option>
+                    </select>
+                    <div class="form-text">{{ help_mail_engine }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-parameter" class="col-sm-2 col-form-label">{{ entry_mail_parameter }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_parameter" value="{{ config_mail_parameter }}" placeholder="{{ entry_mail_parameter }}" id="input-mail-parameter" class="form-control"/>
+                    <div class="form-text">{{ help_mail_parameter }}</div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_smtp }}</legend>
+                <div class="row mb-3">
+                  <label for="input-mail-smtp-hostname" class="col-sm-2 col-form-label">{{ entry_mail_smtp_hostname }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_smtp_hostname" value="{{ config_mail_smtp_hostname }}" placeholder="{{ entry_mail_smtp_hostname }}" id="input-mail-smtp-hostname" class="form-control"/>
+                    <div class="form-text">{{ help_mail_smtp_hostname }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-smtp-username" class="col-sm-2 col-form-label">{{ entry_mail_smtp_username }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_smtp_username" value="{{ config_mail_smtp_username }}" placeholder="{{ entry_mail_smtp_username }}" id="input-mail-smtp-username" class="form-control"/>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-smtp-password" class="col-sm-2 col-form-label">{{ entry_mail_smtp_password }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_smtp_password" value="{{ config_mail_smtp_password }}" placeholder="{{ entry_mail_smtp_password }}" id="input-mail-smtp-password" class="form-control"/>
+                    <div class="form-text">{{ help_mail_smtp_password }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-smtp-port" class="col-sm-2 col-form-label">{{ entry_mail_smtp_port }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_smtp_port" value="{{ config_mail_smtp_port }}" placeholder="{{ entry_mail_smtp_port }}" id="input-mail-smtp-port" class="form-control"/>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-smtp-timeout" class="col-sm-2 col-form-label">{{ entry_mail_smtp_timeout }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_mail_smtp_timeout" value="{{ config_mail_smtp_timeout }}" placeholder="{{ entry_mail_smtp_timeout }}" id="input-mail-smtp-timeout" class="form-control"/>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_mail_alert }}</legend>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_mail_alert }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-control" style="height: 150px; overflow: auto;">
+                      {% set mail_alert_row = 0 %}
+                      {% for mail_alert in mail_alerts %}
+                        <div class="form-check">
+                          <input type="checkbox" name="config_mail_alert[]" value="{{ mail_alert.value }}" id="input-mail-alert-{{ mail_alert_row }}" class="form-check-input"{% if mail_alert.value in config_mail_alert %} checked{% endif %}/> <label for="input-mail-alert-{{ mail_alert_row }}" class="form-check-label">{{ mail_alert.text }}</label>
+                        </div>
+                        {% set mail_alert_row = mail_alert_row + 1 %}
+                      {% endfor %}
+                    </div>
+                    <div class="form-text">{{ help_mail_alert }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-mail-alert-email" class="col-sm-2 col-form-label">{{ entry_mail_alert_email }}</label>
+                  <div class="col-sm-10">
+                    <textarea name="config_mail_alert_email" rows="5" placeholder="{{ entry_mail_alert_email }}" id="input-mail-alert-email" class="form-control">{{ config_mail_alert_email }}</textarea>
+                    <div class="form-text">{{ help_mail_alert_email }}</div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div id="tab-server" class="tab-pane">
+              <fieldset>
+                <legend>{{ text_general }}</legend>
+                <div class="row mb-3">
+                  <label for="input-session-expire" class="col-sm-2 col-form-label">{{ entry_session_expire }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_session_expire" value="{{ config_session_expire }}" placeholder="{{ entry_session_expire }}" id="input-session-expire" class="form-control"/>
+                    <div class="form-text">{{ help_session_expire }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-session-samesite" class="col-sm-2 col-form-label">{{ entry_session_samesite }}</label>
+                  <div class="col-sm-10">
+                    <select name="config_session_samesite" id="input-session-samesite" class="form-select">
+                      <option value="None"{% if config_session_samesite == 'None' %} selected{% endif %}>{{ text_none }}</option>
+                      <option value="Lax"{% if config_session_samesite == 'Lax' %} selected{% endif %}>{{ text_lax }}</option>
+                      <option value="Strict"{% if config_session_samesite == 'Strict' %} selected{% endif %}>{{ text_strict }}</option>
+                    </select>
+                    <div class="form-text">{{ help_session_samesite }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-compression" class="col-sm-2 col-form-label">{{ entry_compression }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_compression" value="{{ config_compression }}" placeholder="{{ entry_compression }}" id="input-compression" class="form-control"/>
+                    <div class="form-text">{{ help_compression }}</div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_security }}</legend>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_storage }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-check form-switch form-switch-lg">
+                      <input type="hidden" name="config_storage" value="0"/>
+                      <input type="checkbox" name="config_storage" value="1" id="input-security" class="form-check-input"{% if config_storage %} checked{% endif %} {% if storage_moved %} disabled{% endif %}/>
+                    </div>
+                    <div class="form-text">{{ help_storage }}</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_user_2fa }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-check form-switch form-switch-lg">
+                      <input type="hidden" name="config_user_2fa" value="0"/>
+                      <input type="checkbox" name="config_user_2fa" value="1" id="input-user-2fa" class="form-check-input"{% if config_user_2fa %} checked{% endif %}/>
+                    </div>
+                    <div class="form-text">{{ help_user_2fa }}</div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_upload }}</legend>
+                <div class="row mb-3 required">
+                  <label for="input-file-max-size" class="col-sm-2 col-form-label">{{ entry_file_max_size }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_file_max_size" value="{{ config_file_max_size }}" placeholder="{{ entry_file_max_size }}" id="input-file-max-size" class="form-control"/>
+                    <div class="form-text">{{ help_file_max_size }}</div>
+                    <div id="error-file-max-size" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-file-ext-allowed" class="col-sm-2 col-form-label">{{ entry_file_ext_allowed }}</label>
+                  <div class="col-sm-10">
+                    <textarea name="config_file_ext_allowed" rows="5" placeholder="{{ entry_file_ext_allowed }}" id="input-file-ext-allowed" class="form-control">{{ config_file_ext_allowed }}</textarea>
+                    <div class="form-text">{{ help_file_ext_allowed }}</div>
+                    <div id="error-file-ext-allowed" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input-file-mime-allowed" class="col-sm-2 col-form-label">{{ entry_file_mime_allowed }}</label>
+                  <div class="col-sm-10">
+                    <textarea name="config_file_mime_allowed" rows="5" placeholder="{{ entry_file_mime_allowed }}" id="input-file-mime-allowed" class="form-control">{{ config_file_mime_allowed }}</textarea>
+                    <div class="form-text">{{ help_file_mime_allowed }}</div>
+                    <div id="error-file-mime-allowed" class="invalid-feedback"></div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_error }}</legend>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_error_display }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-check form-switch form-switch-lg">
+                      <input type="hidden" name="config_error_display" value="0"/>
+                      <input type="checkbox" name="config_error_display" value="1" id="input-error-display" class="form-check-input"{% if config_error_display %} checked{% endif %}/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ entry_error_log }}</label>
+                  <div class="col-sm-10">
+                    <div class="form-check form-switch form-switch-lg">
+                      <input type="hidden" name="config_error_log" value="0"/>
+                      <input type="checkbox" name="config_error_log" value="1" id="input-error-log" class="form-check-input"{% if config_error_log %} checked{% endif %}/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 required">
+                  <label for="input-error-filename" class="col-sm-2 col-form-label">{{ entry_error_filename }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_error_filename" value="{{ config_error_filename }}" placeholder="{{ entry_error_filename }}" id="input-error-filename" class="form-control"/>
+                    <div id="error-error-filename" class="invalid-feedback"></div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-setting').on('click', function() {
+    $.ajax({
+        url: 'index.php?route=common/developer&user_token={{ user_token }}',
+        dataType: 'html',
+        beforeSend: function() {
+            $('#button-setting').button('loading');
+        },
+        complete: function() {
+            $('#button-setting').button('reset');
+        },
+        success: function(html) {
+            $('#modal-developer').remove();
+
+            $('body').prepend(html);
+
+            $('#modal-developer').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$('#input-country').on('change', function() {
+    var element = this;
+
+    $.ajax({
+        url: 'index.php?route=localisation/country.country&user_token={{ user_token }}&country_id=' + this.value,
+        dataType: 'json',
+        beforeSend: function() {
+            $(element).prop('disabled', true);
+            $('#input-zone').prop('disabled', true);
+        },
+        complete: function() {
+            $(element).prop('disabled', false);
+            $('#input-zone').prop('disabled', false);
+        },
+        success: function(json) {
+            html = '<option value="">{{ text_select|escape('js') }}</option>';
+
+            if (json['zone'] && json['zone'] != '') {
+                for (i = 0; i < json['zone'].length; i++) {
+                    html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+                    if (json['zone'][i]['zone_id'] == '{{ config_zone_id }}') {
+                        html += ' selected';
+                    }
+
+                    html += '>' + json['zone'][i]['name'] + '</option>';
+                }
+            } else {
+                html += '<option value="0" selected>{{ text_none|escape('js') }}</option>';
+            }
+
+            $('#input-zone').html(html);
+
+            $('#button-save').prop('disabled', false);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$('#input-country').trigger('change');
+
+var hours_row = {{ hours_row }};
+
+$('#button-hours-row').on('click', function() {
+
+    html = '<tr id="hours-row-' + hours_row + '">';
+    html += '  <td class="text-center"><input type="time" name="config_open_hours[' + hours_row + '][open]" value="" class="form-control"/></td>';
+    html += '  <td class="text-center"><input type="time" name="config_open_hours[' + hours_row + '][close]" value="" class="form-control"/></td>';
+    html += '  <td class="text-start">';
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][1]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][1]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_monday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';  
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][2]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][2]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_tuesday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';     
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][3]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][3]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_wednesday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';     
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][4]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][4]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_thursday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';       
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][5]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][5]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_friday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';       
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][6]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][6]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_saturday }}</div>';
+    html += '     </div>';
+    html += '  </td>';
+    html += '  <td class="text-start">';       
+    html += '     <div class="col-sm-12">';
+    html += '       <div class="form-check form-switch form-switch-lg">';
+    html += '         <input type="hidden" name="config_open_hours[' + hours_row + '][days][7]" value=""/>';
+    html += '         <input type="checkbox" name="config_open_hours[' + hours_row + '][days][7]" value="1" class="form-check-input"/>';
+    html += '       </div>';
+    html += '       <div class="form-text">{{ text_sunday }}</div>';
+    html += '     </div>';                        
+    html += '  </td>';
+    html += '  <td class="text-end"><button type="button" onclick="$(\'#hours-row-' + hours_row + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove|escape('js') }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+    html += '</tr>';
+
+$('#open-hours tbody').append(html);
+
+    hours_row++;
+});
+
+
+var public_holiday_row = {{ public_holiday_row }};
+
+$('#button-public-holidays-row').on('click', function() {
+
+    html = '<tr id="public-holidays-row-' + public_holiday_row + '">';
+    html += '  <td class="text-start"><input type="date" name="config_public_holidays[' + public_holiday_row + '][date]" value="" class="form-control"/></td>';
+    html += '  <td class="text-start"><input type="text" name="config_public_holidays[' + public_holiday_row + '][name]" value="" class="form-control"/></td>';
+    html += '  <td class="text-end"><button type="button" onclick="$(\'#public-holidays-row-' + public_holiday_row + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove|escape('js') }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+    html += '</tr>';
+                                
+$('#public-holidays tbody').append(html);
+
+    public_holiday_row++;
+});
+//--></script>
+{{ footer }}

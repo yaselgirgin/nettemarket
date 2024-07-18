@@ -1,0 +1,168 @@
+<?php
+// Heading
+$_['heading_title']                       = 'Genel Ayarlar';
+
+// Text
+$_['text_companies']                      = 'İşletmeler';
+$_['text_success']                        = 'Başarılı: Ayarlar değiştirildi!';
+$_['text_edit']                           = 'Ayarları Düzenle';
+$_['text_image']                          = 'Resimler';
+$_['text_image_size']                     = 'Resim Boyutları';
+$_['text_mail']                           = 'PHP Mail';
+$_['text_smtp']                           = 'SMTP Mail';
+$_['text_mail_alert']                     = 'E-posta Uyarıları';
+$_['text_mail_order']                     = 'Yeni Sipariş';
+$_['text_general']                        = 'Genel';
+$_['text_security']                       = 'Güvenlik';
+$_['text_upload']                         = 'Yüklemeler';
+$_['text_error']                          = 'Hata İşleme';
+$_['text_agenda']                         = 'Ajanda';
+$_['text_product']                        = 'Ürünler';
+$_['text_tax']                            = 'Vergiler';
+$_['text_invoice']                        = 'Fatura';
+$_['text_hour']                           = 'Saat';
+$_['text_none']                           = ' --- Yok --- ';
+$_['text_lax']                            = 'Lax';
+$_['text_strict']                         = 'Strict';
+$_['text_region']                         = 'Bölge';
+$_['text_language']                       = 'Dil';
+$_['text_currency']                       = 'Para Birimi';
+$_['text_measurement']                    = 'Ölçü Birimleri';
+$_['text_dayGridMonth']                   = 'Aylık';
+$_['text_dayGridWeek']                    = 'Haftalık';
+$_['text_timeGridDay']                    = 'Günlük';
+$_['text_listMonth']                      = 'Aylık Liste';
+$_['text_listWeek']                       = 'Haftalık Liste';
+
+
+// Entry
+$_['entry_name']                          = 'Ticari Ünvan';
+$_['entry_owner']                         = 'İşletme Sahibi';
+$_['entry_address']                       = 'Adres';
+$_['entry_geocode']                       = 'Coğrafi Kod';
+$_['entry_email']                         = 'E-posta';
+$_['entry_telephone']                     = 'Telefon';
+$_['entry_gsm']                           = 'Gsm';
+$_['entry_image']                         = 'İşletme Resmi';
+$_['entry_open']                          = 'Çalışma Saatleri';
+$_['entry_calendar_view']                 = 'Takvim Görünümü';
+$_['entry_public_holidays']               = 'Resmi Tatil Günleri';
+$_['entry_religious_holiday_qurban']      = 'Kurban Bayramı Tatili';
+$_['entry_religious_holiday_ramadan']     = 'Ramazan Bayramı Tatili';
+$_['entry_country']                       = 'Ülke';
+$_['entry_zone']                          = 'Şehir';
+$_['entry_timezone']                      = 'Saat Dilimi';
+$_['entry_language']                      = 'Dil';
+$_['entry_language_admin']                = 'Dil';
+$_['entry_location']                      = 'Şubeler';
+$_['entry_currency']                      = 'Para Birimi';
+$_['entry_currency_engine']               = 'Döviz Kuru Motoru';
+$_['entry_currency_auto']                 = 'Otomatik Güncelle';
+$_['entry_length_class']                  = 'Uzunluk Birimi';
+$_['entry_weight_class']                  = 'Ağırlık Birimi';
+$_['entry_product_description_length']    = 'Liste Açıklama Limiti';
+$_['entry_pagination_admin']              = 'Sayfa Başına Öğe';
+$_['entry_autocomplete_limit']            = 'Otomatik Tamamlama Limiti';
+$_['entry_tax']                           = 'Vergi Dahil Fiyatlar';
+$_['entry_tax_default']                   = 'Vergi Adresini Kullan';
+$_['entry_invoice_prefix']                = 'Fatura Öneki';
+$_['entry_default_status']                = 'Varsayılan Durum';
+$_['entry_processing_status']             = 'İşlemde Olan Durumlar';
+$_['entry_complete_status']               = 'Tamamlanan Durumlar';
+$_['entry_logo']                          = 'Logo';
+
+$_['entry_image_default']                 = 'Varsayılan';
+$_['entry_image_additional']              = 'Ek Resim';
+$_['entry_image_thumb']                   = 'Küçük Resim (thumb)';
+$_['entry_image_popup']                   = 'Büyük Resim';
+$_['entry_image_product']                 = 'Listeleme';
+$_['entry_image_cart']                    = 'Sepet';
+
+$_['entry_width']                         = 'Genişlik';
+$_['entry_height']                        = 'Yükseklik';
+$_['entry_mail_engine']                   = 'E-posta Motoru';
+$_['entry_mail_parameter']                = 'Posta Parametreleri';
+$_['entry_mail_smtp_hostname']            = 'SMTP Host Adı';
+$_['entry_mail_smtp_username']            = 'SMTP Kullanıcı Adı';
+$_['entry_mail_smtp_password']            = 'SMTP Parola';
+$_['entry_mail_smtp_port']                = 'SMTP Port';
+$_['entry_mail_smtp_timeout']             = 'SMTP Zaman Aşımı';
+$_['entry_mail_alert']                    = 'Uyarı E-postaları';
+$_['entry_mail_alert_email']              = 'İlave Uyarı E-posta Adresleri';
+$_['entry_file_max_size']                 = 'Maks. Dosya Boyutu';
+$_['entry_file_ext_allowed']              = 'İzin Verilen Dosya Uzantıları';
+$_['entry_file_mime_allowed']             = 'İzin Verilen Dosya Türleri';
+$_['entry_session_expire']                = 'Oturum Süresi';
+$_['entry_session_samesite']              = 'Oturum Samesite Çerezi';
+$_['entry_compression']                   = 'Sıkıştırma Seviyesi';
+$_['entry_user_2fa']                      = 'İki Faktörlü Doğrulama';
+$_['entry_storage']                       = 'Depolama Dizini Taşıma';
+$_['entry_security']                      = 'İki Faktörlü Doğrulama';
+$_['entry_encryption']                    = 'Şifreleme Anahtarı';
+$_['entry_error_display']                 = 'Hataları Göster';
+$_['entry_error_log']                     = 'Hata Kayıtları';
+$_['entry_error_filename']                = 'Hata Kayıtları Dosya Adı';
+$_['entry_status']                        = 'Durumu';
+
+// Help
+$_['column_open']                         = 'Açılış';
+$_['column_close']                        = 'Kapanış';
+$_['column_days']                         = 'Günler';
+$_['column_date']                         = 'Tarih';
+$_['column_name']                         = 'Adı';
+
+// Help
+$_['help_geocode']                        = 'İşletmenizin coğrafi kodunu elle girin.';
+$_['help_open']                           = 'İşletmenizin çalışma saatlerini girin.';
+$_['help_public_holidays']                = 'İşletmenizin resmi tatil günlerini girin.';
+$_['help_invoice_prefix']                 = 'Fatura önekini ayarlayın (ör. A-2024-00). Fatura kimlikleri her benzersiz önek için 1 den başlayacaktır.';
+$_['help_currency']                       = 'Varsayılan para birimini değiştirir. Web tarayıcınızın önbelleğini ve çerezleri temizlemeniz gerekir.';
+$_['help_currency_auto']                  = 'Para birimleri hergün otomatik olarak güncellenir.';
+$_['help_product_description_length']     = 'Liste görünümde kısa açıklama karakter limiti. (kategoriler, kampanya sayfaları vb).';
+$_['help_autocomplete_limit']             = 'Otomatik tamamlama girişinde kaç satırın gösterileceğini belirler (filtreler, ürünler, kategoriler vb.)';
+$_['help_pagination']                     = 'Sayfa başına kaç öğe gösterileceğini seçin (ürünler, kategoriler vb).';
+$_['help_invoice_status']                 = 'Fatura eklendiğinde varsayılan fatura durumunu ayarlayın.';
+$_['help_processing_status']              = 'Fatura işlemde olduğu durumları ayarlayın.';
+$_['help_complete_status']                = 'Fatura tamamlandığı durumları ayarlayın.';
+$_['help_location']                       = 'İletişim bilgilerinde görüntülenmesini istediğiniz şubeler.';
+$_['help_mail_engine']                    = '\'Mail\' seçeneğini sadece sunucu php mail fonksiyonunu kapatmadıysa seçebilirsiniz.';
+$_['help_mail_parameter']                 = '\'Posta\' da kullanılacak, ilave posta parametreleri girebilirsiniz (örn. -f email@companyaddress.com).';
+$_['help_mail_smtp_hostname']             = 'Güvenli bağlantı için \'tls://\' ya da \'ssl://\' ön-eki eklemeniz gereklidir (örn: tls://smtp.gmail.com).';
+$_['help_mail_smtp_password']             = 'Gmail için buradan uygulama şifresi oluşturmanız gerekebilir: <a href="https://security.google.com/settings/security/apppasswords">Uygulama şifreleri</a>.';
+$_['help_mail_alert']                     = 'Hangi durumlarada uyarı e-posta gönderileceğini seçin.';
+$_['help_mail_alert_email']               = 'E-posta uyarıları için işletme e-postası dışında başka e-posta adresleri ekleyebilirsiniz. Birden çok eklemek için virgül ile ayrınız.';
+$_['help_session_expire']                 = 'PHP Oturum süresi saniye cinsinden ayarlayın (ör. 1 saat için 3600)';
+$_['help_session_samesite']               = 'PHP Oturumu samesite çerezini ayarlayın.';
+$_['help_user_2fa']                       = 'Kullanıcılar için iki faktörlü güvenlik.';
+$_['help_storage']                        = 'Depolama dizini web dizininin dışına taşındıktan sonra bu ayar pasif olur.';
+$_['help_security']                       = 'Yönetim kullanıcıları için iki faktörlü doğrulama.';
+$_['help_file_max_size']                  = 'Yüklenmesine izin verilen maksimum dosya boyutu. Megabayt olarak girin.';
+$_['help_file_ext_allowed']               = 'Yüklenmesine izin verilen eklenti türlerini ekleyin. Her satıra bir eklenti türü ekleyin.';
+$_['help_file_mime_allowed']              = 'Yüklenmesine izin verilen dosya türlerini ekleyin. Her satıra bir dosya türü ekleyin.';
+$_['help_encryption']                     = 'Özel bilgileri şifrelemek için kullanılacak gizli bir anahtar girin.';
+$_['help_compression']                    = 'Daha verimli(hızlı) aktarım için istemci isteklerinde GZIP sıkıştırma kullanın. Sıkıştırma seviyesi olarak 0 ile 9 arasında bir sayı girin. Büyük sayı daha iyi sıkıştırma sağlar.';
+
+// Error
+$_['error_warning']                       = 'Uyarı: Oluşan hatalar için formu dikkatli kontrol edin!';
+$_['error_permission']                    = 'Uyarı: Ayarları düzenleme iznine sahip değilsiniz!';
+$_['error_name']                          = 'Ticari Ünvan 3 ile 32 karakter arasında olmalı!';
+$_['error_owner']                         = 'İşletme sahibi 3 ile 64 karakter arasında olmalı!';
+$_['error_address']                       = 'Adres 10 ile 256 karakter arasında olmalı!';
+$_['error_email']                         = 'E-posta Adresi geçerli değil!';
+$_['error_telephone']                     = 'Telefon 3 ile 32 karakter arasında olmalı!';
+$_['error_product_description_length']    = 'Liste açıklama uzunluğu gerekli!';
+$_['error_pagination']                    = 'Sayfalandırma gerekli!';
+$_['error_image_thumb']                   = 'Ürün sayfası küçük resim için boyutları gerekli!';
+$_['error_image_popup']                   = 'Ürün sayfası büyük resim için resim boyutları gerekli!';
+$_['error_image_product']                 = 'Ürün listesi için resim boyutları gerekli!';
+$_['error_image_cart']                    = 'Sepetim sayfası için resim boyutları gerekli!';
+$_['error_file_max_size']                 = 'Maksimum Dosya Boyutu gerekli!';
+$_['error_security']                      = 'E-posta kurulumunuz yapılmadıysa İki Faktörlü Güvenlik kullanılamaz!';
+$_['error_extension']                     = 'PHP yüklemelere izin verilmiyor!';
+$_['error_mime']                          = 'PHP yüklemelere izin verilmiyor!';
+$_['error_log_required']                  = 'Hata kayıtları için dosya adı gerekli!';
+$_['error_log_invalid']                   = 'Hata kayıtları için dosya adı geçersiz!';
+$_['error_log_extension']                 = 'Hata kayıtları dosya adı uzantısı .log olmalı!';
+$_['error_encryption']                    = 'Şifreleme anahtarı 32 ile 1024 karakter arasında olmalı!';
+$_['error_processing_status']             = 'En az 1 işlemde olan durum seçilmeli';
+$_['error_complete_status']               = 'En az 1 tamamlandı durumu seçilmeli';
