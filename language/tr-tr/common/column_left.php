@@ -21,6 +21,7 @@ $_['text_employee']            = 'Personel';
 $_['text_employees']           = 'Personeller';
 $_['text_extension']           = 'Eklentiler';
 $_['text_finance']             = 'Finans';
+$_['text_fairs']               = 'Fuarlar';
 $_['text_geo_zone']            = 'Bölgeler';
 $_['text_installer']           = 'Eklenti Yükle';
 $_['text_invoice']             = 'Faturalar';

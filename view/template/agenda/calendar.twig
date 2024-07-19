@@ -20,81 +20,167 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 			<div class="modal-body">
-				<div class="row mb-2">
-					<label for="title" class="col-sm-2 col-form-label">Başlık</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="title">
-					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="data_type" class="col-sm-2 col-form-label">Kayıt Türü</label>
-					<div class="col-sm-10">
-						<input type="radio" class="btn-check" name="options-outlined" id="data_type_event" autocomplete="off" checked>
-						<label class="btn btn-outline-primary" for="data_type_event">Etkinlik</label>
-						<input type="radio" class="btn-check" name="options-outlined" id="data_type_task" autocomplete="off">
-						<label class="btn btn-outline-primary" for="data_type_task">Görev</label>
-					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="description" class="col-sm-2 col-form-label">Açıklama</label>
-					<div class="col-sm-10">
-						 <textarea class="form-control" id="description" rows="5"></textarea>
-					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="date_start" class="col-sm-2 col-form-label">Başlangıç</label>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<input type="date" class="form-control" id="date_start">
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4">
-						<input type="time" class="form-control" id="time_start">
-					</div>
-					<div class="col-sm-2 ">
-						<div class="form-check pt-2">
-							<input class="form-check-input" type="checkbox" id="all_day" checked>
-							<label class="form-check-label" for="all_day">
-								Tüm Gün
-							</label>
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a href="#tab-general" data-bs-toggle="tab" class="nav-link active">Genel</a></li>
+					<li class="nav-item d-none" id="rule"><a href="#tab-rule" data-bs-toggle="tab" class="nav-link">Tekrar</a></li>
+					<li class="nav-item"><a href="#tab-guest" data-bs-toggle="tab" class="nav-link">Davetliler</a></li>
+					<li class="nav-item"><a href="#tab-attach" data-bs-toggle="tab" class="nav-link">Ekler</a></li>
+					<li class="nav-item"><a href="#tab-related" data-bs-toggle="tab" class="nav-link">Bağlantılar</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="tab-general" class="tab-pane active">
+						<div class="row mb-2">
+							<label for="title" class="col-sm-2 col-form-label">Başlık</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="title">
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="description" class="col-sm-2 col-form-label">Açıklama</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="description" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Kayıt Türü</legend>
+							<div class="col-lg-3 col-sm-6">
+								<input type="radio" class="btn-check" name="data_type" id="data_type_event" checked>
+								<label class="btn btn-outline-primary" for="data_type_event"><i class="far fa-calendar-check"></i> Etkinlik</label>
+								<input type="radio" class="btn-check" name="data_type" id="data_type_task">
+								<label class="btn btn-outline-primary" for="data_type_task"><i class="far fa-circle-check"></i> Görev</label>
+							</div>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<select class="form-select" id="freq">
+									<option value="never">Tekrarlanmaz</option>
+									<option value="daily">Her Gün</option>
+									<option value="weekly">Her Hafta</option>
+									<option value="monthly">Her Ay</option>
+									<option value="yearly">Her Yıl</option>
+									<option value="new_rule">Özel Tekrar</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="date_start" class="col-sm-2 col-form-label">Başlangıç</label>
+							<div class="col-lg-3 col-sm-6">
+								<input type="date" class="form-control" id="date_start">
+							</div>
+							<div class="col-lg-2 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<input type="time" class="form-control" id="time_start" disabled>
+							</div>
+						</div>
+						<div class="row mb-2" id="date_time_end">
+							<label for="date_end" class="col-sm-2 col-form-label">Bitiş</label>
+							<div class="col-lg-3 col-sm-6">
+								<input type="date" class="form-control" id="date_end">
+							</div>
+							<div class="col-lg-2 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<input type="time" class="form-control" id="time_end" disabled>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="all_day" class="col-sm-2 col-form-label">Tüm Gün</label>
+							<div class="col-lg-3 col-sm-4">
+								<div class="form-check form-switch form-switch-lg">
+									<input type="hidden" value="0"/>
+									<input type="checkbox" value="1" id="all_day" class="form-check-input" checked/>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="all_day" class="col-sm-2 col-form-label">İlgililer</label>
+							<div class="col-lg-3 col-sm-4">
+								 Davetli, Dosya, Cari, Ürün
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="date_start" class="col-sm-2 col-form-label">Bitiş</label>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<input type="date" class="form-control" id="date_end">
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4">
-						<input type="time" class="form-control" id="time_end">
-					</div>
-					<div class="col-sm-2 ">
-						<div class="form-check pt-2">
-							<input class="form-check-input" type="checkbox" id="all_day2" checked>
-							<label class="form-check-label" for="all_day2">
-								Tüm Gün
-							</label>
+					<div id="tab-rule" class="tab-pane">
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Tekrar Aralığı</legend>
+							<div class="col-lg-2 col-sm-3">
+								<input type="number" value="1" min="1" class="form-control">
+							</div>
+							<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0">
+								<select class="form-select" id="rule_cycle">
+									<option value="daily">Gün</option>
+									<option value="weekly">Hafta</option>
+									<option value="monthly">Ay</option>
+									<option value="yearly">Yıl</option>
+								</select>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="add_guest" class="col-sm-2 col-form-label">Davetli Ekle</label>
-					<div class="col-sm-7 ">
-						 <select class="form-select" id="add_guest">
-							<option> </option>
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-						</select>
-					</div>
-				</div>
-				<div class="row mb-2">
-					<label for="attach" class="col-sm-2 col-form-label">Dosya Ekle</label>
-					<div class="col-sm-7">
-							<input class="form-control d-none" type="file" id="attach">
-							<button type="button" id="button-upload" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Dosya Seç</button>
-					</div>
-				</div>
-				 
+						<div class="row mb-2 d-none" id="week_days">
+							<div class="col-sm-10 offset-sm-2">
+								<input type="checkbox" class="btn-check" id="btn-d1" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d1">Pt</label>
+								<input type="checkbox" class="btn-check" id="btn-d2" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d2">Sl</label>
+								<input type="checkbox" class="btn-check" id="btn-d3" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d3">Çr</label>
+								<input type="checkbox" class="btn-check" id="btn-d4" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d4">Pr</label>
+								<input type="checkbox" class="btn-check" id="btn-d5" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d5">Cu</label>
+								<input type="checkbox" class="btn-check" id="btn-d6" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d6">Ct</label>
+								<input type="checkbox" class="btn-check" id="btn-d7" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d7">Pz</label>
+							</div>
+						</div>
 
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Bitiş</legend>
+							<div class="col-sm-10">
+								<input type="radio" class="btn-check" name="rule_finish" id="never" checked>
+								<label class="btn btn-outline-primary" for="never"><i class="fas fa-infinity"></i> Hiçbir zaman</label>
+								<input type="radio" class="btn-check" name="rule_finish" id="finish">
+								<label class="btn btn-outline-primary" for="finish"><i class="far fa-calendar-check"></i> Şu tarihte</label>
+								<input type="radio" class="btn-check" name="rule_finish" id="cycle">
+								<label class="btn btn-outline-primary" for="cycle"><i class="fas fa-arrow-up-9-1"></i> Tekrar Sayısı</label>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col-lg-3 col-sm-6 offset-sm-2 d-none" id="date_finish">
+								<input type="date" class="form-control">
+							</div>
+							<div class="col-lg-2 col-sm-3 offset-sm-2 d-none" id="cycle_number">
+								<input type="number" value="1" min="1" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div id="tab-guest" class="tab-pane">
+						<div class="row mb-2">
+							<label for="add_guest" class="col-sm-2 col-form-label">Davetli Ekle</label>
+							<div class="col-sm-7 ">
+								<select class="form-select" id="add_guest">
+									<option> </option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div id="tab-attach" class="tab-pane">
+						<div class="row mb-2">
+							<label for="attach" class="col-sm-2 col-form-label">Dosya Ekle</label>
+							<div class="col-sm-7">
+									<input class="form-control d-none" type="file" id="attach">
+									<button type="button" id="button-upload" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Dosya Seç</button>
+							</div>
+						</div>
+					</div>
+					<div id="tab-related" class="tab-pane">
+						<div class="row mb-2">
+							<label for="attach" class="col-sm-2 col-form-label">Cari</label>
+							<div class="col-sm-7">
+						</div>
+						<div class="row mb-2">
+							<label for="attach" class="col-sm-2 col-form-label">Ürün</label>
+							<div class="col-sm-7">
+						</div>
+					</div>
+				</div>
 				<div class="text-end">
 					<button type="button" id="button-install" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> {{ button_delete }}</button>
 				</div>
@@ -347,64 +433,77 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <script type="text/javascript"><!--
-// Upload
-$('#button-upload').on('click', function() {
-    $('#form-upload').remove();
 
-    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="upload" /></form>');
-
-    $('#form-upload input[name=\'upload\']').trigger('click');
-
-    $('#form-upload input[name=\'upload\']').on('change', function() {
-        if ((this.files[0].size / 1024) > {{ config_file_max_size }}) {
-            $(this).val('');
-
-            alert('{{ error_upload_size }}');
-        }
-    });
-
-    if (typeof timer != 'undefined') {
-        clearInterval(timer);
-    }
-
-    timer = setInterval(function() {
-        if ($('#form-upload input[name=\'upload\']').val() !== '') {
-            clearInterval(timer);
-
-            $.ajax({
-                url: 'index.php?route=tool/backup.upload&user_token={{ user_token }}',
-                type: 'post',
-                dataType: 'json',
-                data: new FormData($('#form-upload')[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#button-upload').button('loading');
-                },
-                complete: function() {
-                    $('#button-upload').button('reset');
-                },
-                success: function(json) {
-                    $('.alert-dismissible').remove();
-
-                    if (json['error']) {
-                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                    }
-
-                    if (json['success']) {
-                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-
-                        $('#history').load('index.php?route=tool/backup.history&user_token={{ user_token }}');
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        }
-    }, 500);
+$('#all_day').on('click', function() {
+	if (this.checked) {
+    $('#time_start').attr('disabled', true);
+    $('#time_start').val('00:00');
+    $('#time_end').attr('disabled', true);
+    $('#time_end').val('00:00');
+  } else {
+    $('#time_start').removeAttr('disabled');
+    $('#time_end').removeAttr('disabled');
+	}
 });
+
+$('#data_type_task').on('click', function() {
+	if (this.checked) {
+    $('#date_time_end').addClass('d-none');
+  } else {
+		$('#date_time_end').removeClass('d-none');		
+	}
+});
+
+$('#data_type_event').on('click', function() {
+	if (this.checked) {
+    $('#date_time_end').removeClass('d-none');
+  } else {
+    $('#date_time_end').addClass('d-none');
+	}
+});
+
+$('#freq').on('change', function() {
+	if ($(this).find(":checked").val() == 'new_rule') {
+    $('#rule').removeClass('d-none');
+	 	$('[href="#tab-rule"]').tab('show');
+  } else {
+    $('#rule').addClass('d-none');
+	}
+});
+
+$('#never').on('click', function() {
+	if (this.checked) {
+    $('#date_finish').addClass('d-none');
+		$('#cycle_number').addClass('d-none');		
+  } 
+});
+
+$('#finish').on('click', function() {
+	if (this.checked) {
+    $('#date_finish').removeClass('d-none');
+		$('#cycle_number').addClass('d-none');		
+  } 
+});
+
+$('#cycle').on('click', function() {
+	if (this.checked) {
+    $('#date_finish').addClass('d-none');
+		$('#cycle_number').removeClass('d-none');		
+  } 
+});
+
+$('#rule_cycle').on('change', function() {
+	if ($(this).find(":checked").val() == 'weekly') {
+    $('#week_days').removeClass('d-none');
+  } else {
+    $('#week_days').addClass('d-none');
+	}
+});
+  
+
+
+
+
 </script>
 <style>
 .cake-candle .fc-event-title:before {

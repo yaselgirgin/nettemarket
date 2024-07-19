@@ -81,7 +81,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($agenda) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-calendar',
 					'icon'     => 'far fa-calendar-check',
 					'name'     => $this->language->get('text_agenda'),
 					'href'     => '',
@@ -102,7 +102,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($stock) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-stock',
 					'icon'     => 'fas fa-tags',
 					'name'     => $this->language->get('text_stock'),
 					'href'     => '',
@@ -123,7 +123,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($contact) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-contact',
 					'icon'     => 'far fa-address-book',
 					'name'     => $this->language->get('text_contact'),
 					'href'     => '',
@@ -144,7 +144,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($transaction_sale) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-sale',
 					'icon'     => 'far fa-money-bill-1',
 					'name'     => $this->language->get('text_sale'),
 					'href'     => '',
@@ -165,7 +165,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($transaction_purchase) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-purchase',
 					'icon'     => 'fas fa-cart-shopping',
 					'name'     => $this->language->get('text_purchase'),
 					'href'     => '',
@@ -194,7 +194,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($finance) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-finance',
 					'icon'     => 'fas fa-calculator',
 					'name'     => $this->language->get('text_finance'),
 					'href'     => '',
@@ -232,7 +232,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($employee) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-employee',
 					'icon'     => 'fas fa-people-group',
 					'name'     => $this->language->get('text_employee'),
 					'href'     => '',
@@ -245,23 +245,31 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'transaction/invoice')) {
 				$research_development[] = [
+					'name'     => $this->language->get('text_meeting'),
+					'href'     => $this->url->link('arda/meeting', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+			
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$research_development[] = [
 					'name'     => $this->language->get('text_project'),
 					'href'     => $this->url->link('arda/project', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
 			}
-
+			
 			if ($this->user->hasPermission('access', 'transaction/invoice')) {
 				$research_development[] = [
-					'name'     => $this->language->get('text_meeting'),
-					'href'     => $this->url->link('arda/meeting', 'user_token=' . $this->session->data['user_token']),
+					'name'     => $this->language->get('text_fairs'),
+					'href'     => $this->url->link('arda/fairs', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
 			}
 
 			if ($research_development) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-arda',
 					'icon'     => 'far fa-lightbulb',
 					'name'     => $this->language->get('text_research_development'),
 					'href'     => '',
@@ -282,7 +290,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($report) {
 				$data['menus'][] = [
-					'id'       => 'menu-system',
+					'id'       => 'menu-report',
 					'icon'     => 'fas fa-chart-simple',
 					'name'     => $this->language->get('text_report'),
 					'href'     => '',

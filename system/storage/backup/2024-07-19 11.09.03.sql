@@ -277,9 +277,9 @@ INSERT INTO `oc_cron` (`cron_id`, `code`, `description`, `cycle`, `action`, `sta
 
 TRUNCATE TABLE `oc_currency`;
 
-INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('2', 'Amerikan Doları', 'USD', '', '$', '2', '0.03021535', '1', '2024-07-17 19:41:06');
-INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('3', 'Euro', 'EUR', '', '€', '2', '0.02763431', '1', '2024-07-17 19:41:06');
-INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('9', 'Türk Lirası', 'TRY', '', '₺', '0', '1.00000000', '1', '2024-07-17 19:41:06');
+INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('2', 'Amerikan Doları', 'USD', '', '$', '2', '0.03021535', '1', '2024-07-18 16:33:35');
+INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('3', 'Euro', 'EUR', '', '€', '2', '0.02763431', '1', '2024-07-18 16:33:35');
+INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES ('9', 'Türk Lirası', 'TRY', '', '₺', '0', '1.00000000', '1', '2024-07-18 16:33:35');
 
 TRUNCATE TABLE `oc_event`;
 
@@ -787,7 +787,7 @@ INSERT INTO `oc_process_status` (`process_status_id`, `language_id`, `name`) VAL
 
 TRUNCATE TABLE `oc_session`;
 
-INSERT INTO `oc_session` (`session_id`, `data`, `expire`) VALUES ('79ef6f43b43d6a0ae915d23187', '{"user_id":"1","user_token":"9aa0fbff0efe35cf512d146c24b3b9a6"}', '2024-07-18 16:52:27');
+INSERT INTO `oc_session` (`session_id`, `data`, `expire`) VALUES ('79ef6f43b43d6a0ae915d23187', '{"user_id":"1","user_token":"41abd84d7ab255d161c54e700ba63d32"}', '2024-07-20 08:09:03');
 
 TRUNCATE TABLE `oc_setting`;
 
@@ -815,67 +815,70 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `ser
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('215', '0', 'total_shipping', 'total_shipping_status', '1', '0');
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('216', '0', 'total_shipping', 'total_shipping_estimator', '1', '0');
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('1870', '0', 'developer', 'developer_sass', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4084', '0', 'config', 'config_name', 'Firmanızın Adı Ltd. Şti.', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4085', '0', 'config', 'config_owner', 'Firmanızın Adı', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4086', '0', 'config', 'config_address', 'Adres - İlçe', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4087', '0', 'config', 'config_zone_id', '3354', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4088', '0', 'config', 'config_country_id', '215', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4089', '0', 'config', 'config_geocode', '', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4090', '0', 'config', 'config_email', 'yaselgirgin@gmail.com', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4091', '0', 'config', 'config_telephone', '+90 212 123 4567', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4092', '0', 'config', 'config_gsm', '+90 512 123 4567', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4093', '0', 'config', 'config_logo', 'catalog/schematic_EYpIiY40i3.jpg', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4094', '0', 'config', 'config_open_hours', '[{"open":"09:00","close":"18:00","days":{"1":"1","2":"1","3":"1","4":"1","5":"1","6":"","7":""}},{"open":"10:00","close":"14:00","days":{"1":"","2":"","3":"","4":"","5":"","6":"1","7":""}}]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4095', '0', 'config', 'config_location', '["1"]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4096', '0', 'config', 'config_language_admin', 'tr-tr', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4097', '0', 'config', 'config_timezone', 'Europe/Istanbul', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4098', '0', 'config', 'config_currency', 'TRY', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4099', '0', 'config', 'config_currency_engine', 'ecb', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4100', '0', 'config', 'config_currency_auto', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4101', '0', 'config', 'config_length_class_id', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4102', '0', 'config', 'config_weight_class_id', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4103', '0', 'config', 'config_public_holidays', '[{"date":"2024-01-01","name":"Y\\u0131lba\\u015f\\u0131"},{"date":"2024-05-01","name":"Emek ve Dayan\\u0131\\u015fma G\\u00fcn\\u00fc"},{"date":"2024-10-29","name":"Cumhuriyet Bayram\\u0131"},{"date":"2024-07-15","name":"Demokrasi ve Milli Birlik G\\u00fcn\\u00fc"}]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4104', '0', 'config', 'config_product_description_length', '100', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4105', '0', 'config', 'config_pagination_admin', '20', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4106', '0', 'config', 'config_autocomplete_limit', '5', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4107', '0', 'config', 'config_tax', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4108', '0', 'config', 'config_tax_default', '', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4109', '0', 'config', 'config_invoice_prefix', 'A-2024-00', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4110', '0', 'config', 'config_process_status_id', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4111', '0', 'config', 'config_processing_status', '["1"]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4112', '0', 'config', 'config_complete_status', '["3","4","2"]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4113', '0', 'config', 'config_image_default_width', '250', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4114', '0', 'config', 'config_image_default_height', '250', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4115', '0', 'config', 'config_image_thumb_width', '100', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4116', '0', 'config', 'config_image_thumb_height', '100', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4117', '0', 'config', 'config_image_popup_width', '800', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4118', '0', 'config', 'config_image_popup_height', '800', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4119', '0', 'config', 'config_image_product_width', '250', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4120', '0', 'config', 'config_image_product_height', '250', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4121', '0', 'config', 'config_image_additional_width', '100', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4122', '0', 'config', 'config_image_additional_height', '100', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4123', '0', 'config', 'config_image_cart_width', '50', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4124', '0', 'config', 'config_image_cart_height', '50', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4125', '0', 'config', 'config_mail_engine', 'smtp', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4126', '0', 'config', 'config_mail_parameter', '', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4127', '0', 'config', 'config_mail_smtp_hostname', 'mail.nettemarket.com', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4128', '0', 'config', 'config_mail_smtp_username', 'admin@nettemarket.com', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4129', '0', 'config', 'config_mail_smtp_password', '2807Myg1979', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4130', '0', 'config', 'config_mail_smtp_port', '587', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4131', '0', 'config', 'config_mail_smtp_timeout', '5', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4132', '0', 'config', 'config_mail_alert', '["order"]', '1');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4133', '0', 'config', 'config_mail_alert_email', '', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4134', '0', 'config', 'config_session_expire', '86400', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4135', '0', 'config', 'config_session_samesite', 'Strict', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4136', '0', 'config', 'config_compression', '0', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4137', '0', 'config', 'config_storage', '0', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4138', '0', 'config', 'config_user_2fa', '0', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4139', '0', 'config', 'config_file_max_size', '20', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4140', '0', 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\nwebp\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nmp4\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4141', '0', 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/webp\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-zip\r\napplication/x-zip-compressed\r\napplication/rar\r\napplication/x-rar\r\napplication/x-rar-compressed\r\napplication/octet-stream\r\naudio/mpeg\r\nvideo/mp4\r\nvideo/quicktime\r\napplication/pdf', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4142', '0', 'config', 'config_error_display', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4143', '0', 'config', 'config_error_log', '1', '0');
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4144', '0', 'config', 'config_error_filename', 'error.log', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4713', '0', 'config', 'config_name', 'Firmanızın Adı Ltd. Şti.', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4714', '0', 'config', 'config_owner', 'Firmanızın Adı', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4715', '0', 'config', 'config_address', 'Adres - İlçe', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4716', '0', 'config', 'config_zone_id', '3354', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4717', '0', 'config', 'config_country_id', '215', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4718', '0', 'config', 'config_geocode', '', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4719', '0', 'config', 'config_email', 'yaselgirgin@gmail.com', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4720', '0', 'config', 'config_telephone', '+90 212 123 4567', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4721', '0', 'config', 'config_gsm', '+90 512 123 4567', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4722', '0', 'config', 'config_logo', 'catalog/schematic_EYpIiY40i3.jpg', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4723', '0', 'config', 'config_open_hours', '[{"open":"09:00","close":"18:00","days":{"1":"1","2":"1","3":"1","4":"1","5":"1","6":"","7":""}},{"open":"10:00","close":"16:00","days":{"1":"","2":"","3":"","4":"","5":"","6":"1","7":""}}]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4724', '0', 'config', 'config_location', '["1"]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4725', '0', 'config', 'config_language_admin', 'tr-tr', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4726', '0', 'config', 'config_timezone', 'Europe/Istanbul', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4727', '0', 'config', 'config_currency', 'TRY', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4728', '0', 'config', 'config_currency_engine', 'ecb', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4729', '0', 'config', 'config_currency_auto', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4730', '0', 'config', 'config_length_class_id', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4731', '0', 'config', 'config_weight_class_id', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4732', '0', 'config', 'config_calendar_view', 'dayGridMonth', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4733', '0', 'config', 'config_public_holidays', '[{"date":"2024-01-01","name":"Y\\u0131lba\\u015f\\u0131"},{"date":"2024-05-01","name":"Emek ve Dayan\\u0131\\u015fma G\\u00fcn\\u00fc"},{"date":"2024-07-15","name":"Demokrasi ve Milli Birlik G\\u00fcn\\u00fc"},{"date":"2024-10-29","name":"Cumhuriyet Bayram\\u0131"}]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4734', '0', 'config', 'config_religious_holiday_qurban', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4735', '0', 'config', 'config_religious_holiday_ramadan', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4736', '0', 'config', 'config_product_description_length', '100', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4737', '0', 'config', 'config_pagination_admin', '20', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4738', '0', 'config', 'config_autocomplete_limit', '5', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4739', '0', 'config', 'config_tax', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4740', '0', 'config', 'config_tax_default', '', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4741', '0', 'config', 'config_invoice_prefix', 'A-2024-00', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4742', '0', 'config', 'config_process_status_id', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4743', '0', 'config', 'config_processing_status', '["1"]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4744', '0', 'config', 'config_complete_status', '["3","4","2"]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4745', '0', 'config', 'config_image_default_width', '250', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4746', '0', 'config', 'config_image_default_height', '250', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4747', '0', 'config', 'config_image_thumb_width', '100', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4748', '0', 'config', 'config_image_thumb_height', '100', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4749', '0', 'config', 'config_image_popup_width', '800', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4750', '0', 'config', 'config_image_popup_height', '800', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4751', '0', 'config', 'config_image_product_width', '250', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4752', '0', 'config', 'config_image_product_height', '250', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4753', '0', 'config', 'config_image_additional_width', '100', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4754', '0', 'config', 'config_image_additional_height', '100', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4755', '0', 'config', 'config_image_cart_width', '50', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4756', '0', 'config', 'config_image_cart_height', '50', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4757', '0', 'config', 'config_mail_engine', 'smtp', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4758', '0', 'config', 'config_mail_parameter', '', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4759', '0', 'config', 'config_mail_smtp_hostname', 'mail.nettemarket.com', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4760', '0', 'config', 'config_mail_smtp_username', 'admin@nettemarket.com', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4761', '0', 'config', 'config_mail_smtp_password', '2807Myg1979', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4762', '0', 'config', 'config_mail_smtp_port', '587', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4763', '0', 'config', 'config_mail_smtp_timeout', '5', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4764', '0', 'config', 'config_mail_alert', '["order"]', '1');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4765', '0', 'config', 'config_mail_alert_email', '', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4766', '0', 'config', 'config_session_expire', '86400', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4767', '0', 'config', 'config_session_samesite', 'Strict', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4768', '0', 'config', 'config_compression', '0', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4769', '0', 'config', 'config_storage', '0', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4770', '0', 'config', 'config_user_2fa', '0', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4771', '0', 'config', 'config_file_max_size', '20', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4772', '0', 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\nwebp\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nmp4\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4773', '0', 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/webp\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-zip\r\napplication/x-zip-compressed\r\napplication/rar\r\napplication/x-rar\r\napplication/x-rar-compressed\r\napplication/octet-stream\r\naudio/mpeg\r\nvideo/mp4\r\nvideo/quicktime\r\napplication/pdf', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4774', '0', 'config', 'config_error_display', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4775', '0', 'config', 'config_error_log', '1', '0');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES ('4776', '0', 'config', 'config_error_filename', 'error.log', '0');
 
 TRUNCATE TABLE `oc_startup`;
 
@@ -935,6 +938,7 @@ INSERT INTO `oc_user_login` (`user_login_id`, `user_id`, `ip`, `user_agent`, `da
 INSERT INTO `oc_user_login` (`user_login_id`, `user_id`, `ip`, `user_agent`, `date_added`) VALUES ('22', '1', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '2024-07-17 18:48:01');
 INSERT INTO `oc_user_login` (`user_login_id`, `user_id`, `ip`, `user_agent`, `date_added`) VALUES ('23', '1', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '2024-07-17 19:46:34');
 INSERT INTO `oc_user_login` (`user_login_id`, `user_id`, `ip`, `user_agent`, `date_added`) VALUES ('24', '1', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '2024-07-17 19:52:20');
+INSERT INTO `oc_user_login` (`user_login_id`, `user_id`, `ip`, `user_agent`, `date_added`) VALUES ('25', '1', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '2024-07-18 14:22:40');
 
 TRUNCATE TABLE `oc_weight_class`;
 
