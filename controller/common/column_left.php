@@ -171,6 +171,27 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 					'href'     => '',
 					'children' => $transaction_purchase
 				];
+			}	
+			
+			// Service
+			$service = [];
+
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$service[] = [
+					'name'     => $this->language->get('text_service'),
+					'href'     => $this->url->link('transaction/invoice.purchase', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+
+			if ($service) {
+				$data['menus'][] = [
+					'id'       => 'menu-service',
+					'icon'     => 'fas fa-screwdriver-wrench',
+					'name'     => $this->language->get('text_service'),
+					'href'     => '',
+					'children' => $service
+				];
 			}				
 
 			// Finance
@@ -188,6 +209,14 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 				$finance[] = [
 					'name'     => $this->language->get('text_cheques_bonds'),
 					'href'     => $this->url->link('finance/future', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}	
+
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$finance[] = [
+					'name'     => $this->language->get('text_investment'),
+					'href'     => $this->url->link('finance/investment', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
 			}			
@@ -282,8 +311,32 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'transaction/invoice')) {
 				$report[] = [
-					'name'     => $this->language->get('text_summary'),
+					'name'     => $this->language->get('text_report_summary'),
 					'href'     => $this->url->link('report/summary', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$report[] = [
+					'name'     => $this->language->get('text_report_finance'),
+					'href'     => $this->url->link('report/summary2', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+			
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$report[] = [
+					'name'     => $this->language->get('text_report_debit_credit'),
+					'href'     => $this->url->link('report/summary3', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+			
+			if ($this->user->hasPermission('access', 'transaction/invoice')) {
+				$report[] = [
+					'name'     => $this->language->get('text_report_sale_purchase'),
+					'href'     => $this->url->link('report/summary5', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
 			}
