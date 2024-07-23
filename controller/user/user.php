@@ -801,10 +801,17 @@ class User extends \Opencart\System\Engine\Controller {
 				$filter_email = '';
 			}
 
+			if (isset($this->request->get['filter_status'])) {
+				$filter_status = $this->request->get['filter_status'];
+			} else {
+				$filter_status = '';
+			}
+
 			$filter_data = [
 				'filter_username' => $filter_username,
 				'filter_name'     => $filter_name,
 				'filter_email'    => $filter_email,
+				'filter_status'   => $filter_status,
 				'start'           => 0,
 				'limit'           => $this->config->get('config_autocomplete_limit')
 			];

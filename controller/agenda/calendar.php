@@ -45,7 +45,17 @@ class Calendar extends \Opencart\System\Engine\Controller {
 			'end_date'   		=> date('Y-m-d', strtotime($ramadan. ' +3 days')),
 		];
 
-	 	$data['user_token'] = $this->session->data['user_token'];
+		// Guest Users
+		$data['guest_users'] = [];
+
+		// Guest User Groups
+		$data['guest_user_groups'] = [];
+
+		$data['error_upload_size'] = sprintf($this->language->get('error_upload_size'), $this->config->get('config_file_max_size'));
+		$data['config_file_max_size'] = ((int)$this->config->get('config_file_max_size') * 1024 * 1024);
+		$data['upload'] = $this->url->link('tool/upload.upload', 'user_token=' . $this->session->data['user_token']);
+
+		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

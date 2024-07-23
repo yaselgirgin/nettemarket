@@ -138,15 +138,15 @@ class User extends \Opencart\System\Engine\Model {
 		$implode = [];
 
 		if (!empty($data['filter_username'])) {
-			$implode[] = "LCASE(`u`.`username`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_username']) . '%') . "'";
+			$implode[] = "LCASE(`u`.`username`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_username']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(`u`.`firstname`, ' ', `u`.`lastname`)) LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_name']) . '%') . "'";
+			$implode[] = "LCASE(CONCAT(`u`.`firstname`, ' ', `u`.`lastname`)) LIKE '%" . $this->db->escape('%' . oc_strtolower($data['filter_name']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "LCASE(`u`.`email`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_email']) . '%') . "'";
+			$implode[] = "LCASE(`u`.`email`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_email']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_user_group_id'])) {
@@ -154,7 +154,7 @@ class User extends \Opencart\System\Engine\Model {
 		}
 
 		if (!empty($data['filter_ip'])) {
-			$implode[] = "`u`.`user_id` IN (SELECT `user_id` FROM `" . DB_PREFIX . "user_login` WHERE `ip` LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_ip']) . '%') . "')";
+			$implode[] = "`u`.`user_id` IN (SELECT `user_id` FROM `" . DB_PREFIX . "user_login` WHERE `ip` LIKE '%" . $this->db->escape('%' . oc_strtolower($data['filter_ip']) . '%') . "')";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
@@ -217,15 +217,15 @@ class User extends \Opencart\System\Engine\Model {
 		$implode = [];
 
 		if (!empty($data['filter_username'])) {
-			$implode[] = "LCASE(`u`.`username`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_username']) . '%') . "'";
+			$implode[] = "LCASE(`u`.`username`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_username']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(`u`.`firstname`, ' ', `u`.`lastname`)) LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_name']) . '%') . "'";
+			$implode[] = "LCASE(CONCAT(`u`.`firstname`, ' ', `u`.`lastname`)) LIKE '%" . $this->db->escape('%' . oc_strtolower($data['filter_name']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "LCASE(`u`.`email`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_email']) . '%') . "'";
+			$implode[] = "LCASE(`u`.`email`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_email']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_user_group_id'])) {
@@ -233,7 +233,7 @@ class User extends \Opencart\System\Engine\Model {
 		}
 
 		if (!empty($data['filter_ip'])) {
-			$implode[] = "`u`.`user_id` IN (SELECT `user_id` FROM `" . DB_PREFIX . "user_login` WHERE `ip` LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_ip']) . '%') . "')";
+			$implode[] = "`u`.`user_id` IN (SELECT `user_id` FROM `" . DB_PREFIX . "user_login` WHERE `ip` LIKE '&" . $this->db->escape('%' . oc_strtolower($data['filter_ip']) . '%') . "')";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {

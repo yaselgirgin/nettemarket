@@ -179,7 +179,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 			if ($this->user->hasPermission('access', 'transaction/invoice')) {
 				$service[] = [
 					'name'     => $this->language->get('text_service'),
-					'href'     => $this->url->link('transaction/invoice.purchase', 'user_token=' . $this->session->data['user_token']),
+					'href'     => $this->url->link('service/service', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
 			}

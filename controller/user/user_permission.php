@@ -379,4 +379,44 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	/**
+	 * Autocomplete
+	 *
+	 * @return void
+	 */
+	public function autocomplete(): void {
+		$json = [];
+
+		if (isset($this->request->get['filter_name'])) {
+
+			$filter_data = [
+				'filter_name'     => $this->request->get['filter_name'],
+				'start'           => 0,
+				'limit'           => $this->config->get('config_autocomplete_limit')
+			];
+
+			$this->load->model('user/user_group');
+
+			$results = $this->model_user_user_group->getUserGroups($filter_data);
+
+			foreach ($results as $result) {
+				$json[] = [
+					'user_group_id' => $result['user_group_id'],
+					'name'          => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+				];
+			}
+		}
+
+		$sort_order = [];
+
+		foreach ($json as $key => $value) {
+			$sort_order[$key] = $value['user_group_id'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $json);
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}	
 }

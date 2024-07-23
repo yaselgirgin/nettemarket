@@ -306,6 +306,7 @@ $(document).on('click', '[data-oc-toggle=\'upload\']', function () {
 
                         if (json['code']) {
                             $($(element).attr('data-oc-target')).val(json['code']);
+                            $($(element).attr('data-oc-target-name')).val(json['name']);
 
                             $(element).parent().find('[data-oc-toggle=\'download\'], [data-oc-toggle=\'clear\']').prop('disabled', false);
                         }

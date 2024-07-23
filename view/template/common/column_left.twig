@@ -15,10 +15,11 @@
 				{% if menu.href %}
 					<a href="{{ menu.href }}"><i class="{{ menu.icon }}"></i> {{ menu.name }}</a>
 				{% else %}
-					<a href="#collapse-{{ i }}" data-bs-toggle="collapse" class="parent collapsed"><i class="{{ menu.icon }}"></i> {{ menu.name }}</a>
+
+					<a href="#collapse-{{ i }}" data-bs-toggle="collapse" class="parent collapsed" data-bs-target="#collapse-{{ i }}" aria-expanded="false" aria-controls="#collapse-{{ i }}}"><i class="{{ menu.icon }}"></i> {{ menu.name }}</a>
 				{% endif %}
 				{% if menu.children %}
-					<ul id="collapse-{{ i }}" class="collapse">
+					<ul id="collapse-{{ i }}" class="collapse" data-bs-parent="#menu">
 						{% set j = 0 %}
 						{% for children_1 in menu.children %}
 							<li>{% if children_1.href %}

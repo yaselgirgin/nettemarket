@@ -390,6 +390,7 @@ class Upload extends \Opencart\System\Engine\Controller {
 			$this->load->model('tool/upload');
 
 			$json['code'] = $this->model_tool_upload->addUpload($filename, $file);
+			$json['name'] = $filename;
 
 			$json['success'] = $this->language->get('text_success');
 		}
