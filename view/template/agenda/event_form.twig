@@ -1,0 +1,399 @@
+<div id="modal-event" class="modal modal-lg show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger"><i class="far fa-calendar-check"></i> <span id="evet-title">Takvime Ekle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a href="#tab-general" data-bs-toggle="tab" class="nav-link active">Genel</a></li>
+					<li class="nav-item d-none" id="rule"><a href="#tab-rule" data-bs-toggle="tab" class="nav-link">Tekrar</a></li>
+					<li class="nav-item"><a href="#tab-guest" data-bs-toggle="tab" class="nav-link">Davetliler</a></li>
+					<li class="nav-item"><a href="#tab-attach" data-bs-toggle="tab" class="nav-link">Ekler</a></li>
+					<li class="nav-item"><a href="#tab-related" data-bs-toggle="tab" class="nav-link">Bağlantılar</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="tab-general" class="tab-pane active">
+						<div class="row mb-2">
+							<label for="title" class="col-sm-2 col-form-label">Başlık</label>
+							<div class="col-sm-10">
+								<input type="text" name="title" class="form-control" id="title">
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="description" class="col-sm-2 col-form-label">Açıklama</label>
+							<div class="col-sm-10">
+								<textarea name="description" class="form-control" id="description" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Kategori</legend>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<select name="category" class="form-select">
+									<option value=""></option>
+									<option value="receipt">Tahsilat</option>
+									<option value="payment">Ödeme</option>
+									<option value="reconciliation">Mütabakat</option>
+									<option value="meeting">Toplantı</option>
+									<option value="call">Telefon Görüşmesi</option>
+									<option value="visit">Müşteri Zİyareti</option>
+									<option value="interview">Görüşme</option>
+									<option value="email">E-posta</option>
+									<option value="presentation">Sunum</option>
+									<option value="document">Belge</option>
+									<option value="cargo">Kargo</option>
+									<option value="leave">İzin</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Kayıt Türü</legend>
+							<div class="col-lg-3 col-sm-6">
+								<input type="radio" name="data_type" class="btn-check" id="data-type-event" checked>
+								<label class="btn btn-outline-primary" for="data-type-event"><i class="far fa-calendar-check"></i> Etkinlik</label>
+								<input type="radio" name="data_type" class="btn-check" id="data-type-task">
+								<label class="btn btn-outline-primary" for="data-type-task"><i class="far fa-circle-check"></i> Görev</label>
+							</div>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<select name="freq" class="form-select" id="freq">
+									<option value="never">Tekrarlanmaz</option>
+									<option value="daily">Her Gün</option>
+									<option value="weekly">Her Hafta</option>
+									<option value="monthly">Her Ay</option>
+									<option value="yearly">Her Yıl</option>
+									<option value="new_rule">Özel Tekrar</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="date-start" class="col-sm-2 col-form-label">Başlangıç</label>
+							<div class="col-lg-3 col-sm-6">
+								<input type="date" name="date_start" class="form-control" id="date-start">
+							</div>
+							<div class="col-lg-2 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<input type="time" name="time_start" class="form-control" id="time-start" disabled>
+							</div>
+						</div>
+						<div class="row mb-2" id="date-time-end">
+							<label for="date-end" class="col-sm-2 col-form-label">Bitiş</label>
+							<div class="col-lg-3 col-sm-6">
+								<input type="date" name="date_end" class="form-control" id="date-end">
+							</div>
+							<div class="col-lg-2 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<input type="time" name="time_end" class="form-control" id="time-end" disabled>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="all-day" class="col-sm-2 col-form-label">Tüm Gün</label>
+							<div class="col-lg-3 col-sm-4">
+								<div class="form-check form-switch form-switch-lg">
+									<input type="hidden" value="0"/>
+									<input type="checkbox" name="all_day" value="1" id="all-day" class="form-check-input" checked/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-rule" class="tab-pane">
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Tekrar Aralığı</legend>
+							<div class="col-lg-2 col-sm-3">
+								<input type="number" name="rule_count" value="1" min="1" class="form-control">
+							</div>
+							<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0">
+								<select name="rule_cycle" class="form-select" id="rule-cycle">
+									<option value="daily">Gün</option>
+									<option value="weekly">Hafta</option>
+									<option value="monthly">Ay</option>
+									<option value="yearly">Yıl</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-2 d-none" id="week-days">
+							<div class="col-sm-10 offset-sm-2">
+								<input type="checkbox" name="rule_week_day_1" class="btn-check" id="btn-d1" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d1">Pt</label>
+								<input type="checkbox" name="rule_week_day_2" class="btn-check" id="btn-d2" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d2">Sl</label>
+								<input type="checkbox" name="rule_week_day_3" class="btn-check" id="btn-d3" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d3">Çr</label>
+								<input type="checkbox" name="rule_week_day_4" class="btn-check" id="btn-d4" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d4">Pr</label>
+								<input type="checkbox" name="rule_week_day_5" class="btn-check" id="btn-d5" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d5">Cu</label>
+								<input type="checkbox" name="rule_week_day_6" class="btn-check" id="btn-d6" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d6">Ct</label>
+								<input type="checkbox" name="rule_week_day_7" class="btn-check" id="btn-d7" autocomplete="off">
+								<label class="btn btn-outline-primary" for="btn-d7">Pz</label>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Bitiş</legend>
+							<div class="col-lg-4 col-sm-6 mt-2 mt-lg-0 mt-sm-0">
+								<select name="rule_finish" class="form-select" id="rule-finish">
+									<option value="never">Hiçbir zaman</option>
+									<option value="date">Şu tarihte</option>
+									<option value="cycle">Tekrar Sayısı</option>
+								</select>
+							</div>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0 d-none" id="rule-finish-date">
+								<input type="date" name="rule_finish_date" class="form-control">
+							</div>
+							<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0 d-none" id="rule-finish-cycle">
+								<input type="number" name="rule_finish_cycle" value="1" min="1" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div id="tab-guest" class="tab-pane">
+						<div class="row mb-2">
+							<label for="input-user" class="col-sm-2 col-form-label">Kullanıcı Ekle</label>
+							<div class="col-sm-10">
+								<input type="text" name="user" value="" placeholder="{{ entry_user }}" id="input-user" data-oc-target="autocomplete-user" class="form-control" autocomplete="off"/>
+								<ul id="autocomplete-user" class="dropdown-menu"></ul>
+								<div class="input-group">
+									<div class="form-control p-0" style="height: 115px; overflow: auto;">
+										<table id="guest-user" class="table m-0">
+											<tbody>
+												{% for guest_user in guest_users %}
+													<tr id="guest-user-{{ guest_user.user_id }}">
+														<td>{{ guest_user.name }}<input type="hidden" name="guest_user[]" value="{{ guest_user.user_id }}"/></td>
+														<td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="form-text">{{ help_add_user }}autocomplete</div>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<label for="input-user-group" class="col-sm-2 col-form-label">Grup Ekle</label>
+							<div class="col-sm-10">
+								<input type="text" name="user_group" value="" placeholder="{{ entry_user_group }}" id="input-user-group" data-oc-target="autocomplete-user-group" class="form-control" autocomplete="off"/>
+								<ul id="autocomplete-user-group" class="dropdown-menu"></ul>
+								<div class="input-group">
+									<div class="form-control p-0" style="height: 115px; overflow: auto;">
+										<table id="guest-user-group" class="table m-0">
+											<tbody>
+												{% for guest_user_group in guest_user_groups %}
+													<tr id="guest-user-group-{{ guest_user_group.group_id }}">
+														<td>{{ guest_user_group.name }}<input type="hidden" name="guest_user_group[]" value="{{ guest_user_group.group_id }}"/></td>
+														<td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="form-text">{{ help_add_user_group }}autocomplete</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-attach" class="tab-pane">
+						<div class="row mb-2">
+							<div class="col-sm-12">
+								<div class="table-responsive">
+									<table id="upload" class="table table-hover">
+										<tbody>
+											{% set upload_row = 0 %}
+											{% for upload in uploads %}
+												<tr id="upload-row-{{ upload_row }}">
+													<td class="text-start col-sm-10" colspan="2">
+														<div class="input-group">
+															<button type="button" data-oc-toggle="upload" data-oc-url="{{ upload }}" id="button-upload-{{ upload_row }}" data-oc-target="#input-upload-{{ upload_row }}" data-oc-target-name="#input-upload-file-{{ upload_row }}" data-oc-size-max="{{ config_file_max_size }}" data-oc-size-error="{{ error_upload_size }}" class="btn btn-primary"><i class="fa-solid fa-upload"></i> {{ button_upload }}</button>
+															<input type="hidden" name="upload[{{ upload_row }}]" value="" id="input-upload-{{ upload_row }}"/>
+															<input type="text" value="" id="input-upload-file-{{ upload_row }}" class="form-control"/>
+															<button type="button" data-oc-toggle="download" data-oc-target="#input-upload-{{ upload_row }}"{% if not upload[upload_row] %} disabled{% endif %} class="btn btn-outline-secondary"><i class="fa-solid fa-download"></i> {{ button_download }}</button>
+															<button type="button" data-oc-toggle="clear" data-bs-toggle="tooltip" title="{{ button_clear }}" data-oc-target="#input-upload-file-{{ upload_row }}"{% if not upload[upload_row] %} disabled{% endif %} class="btn btn-outline-danger"><i class="fa-solid fa-eraser"></i></button>
+														</div>
+													</td>
+												</tr>
+												{% set upload_row = upload_row + 1 %}
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<td><div class="form-text">{{ help_upload }} yükleme yazısı</div></td>
+												<td class="text-end"><button type="button" id="button-upload-row" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-related" class="tab-pane">
+						<div class="row mb-2">
+							<legend for="cari" class="col-sm-2 col-form-label">Cari</legend>
+							<div class="col-sm-7"></div>
+						</div>
+						<div class="row mb-2">
+							<legend for="urun" class="col-sm-2 col-form-label">Ürün</legend>
+							<div class="col-sm-7"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+        <div class="text-end">
+					<button type="button" id="button-save" class="btn btn-primary"><i class="fas fa-floppy-disk"></i> {{ button_save }}</button>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+
+$('#all-day').on('click', function() {
+	if (this.checked) {
+    $('#time-start').attr('disabled', true);
+    $('#time-start').val('00:00');
+    $('#time-end').attr('disabled', true);
+    $('#time-end').val('00:00');
+  } else {
+    $('#time-start').removeAttr('disabled');
+    $('#time-end').removeAttr('disabled');
+	}
+});
+
+$('#data-type-task').on('click', function() {
+	if (this.checked) {
+    $('#date-time-end').addClass('d-none');
+  } else {
+		$('#date-time-end').removeClass('d-none');		
+	}
+});
+
+$('#data-type-event').on('click', function() {
+	if (this.checked) {
+    $('#date-time-end').removeClass('d-none');
+  } else {
+    $('#date-time-end').addClass('d-none');
+	}
+});
+
+$('#freq').on('change', function() {
+	if ($(this).find(":checked").val() == 'new_rule') {
+    $('#rule').removeClass('d-none');
+	 	$('[href="#tab-rule"]').tab('show');
+  } else {
+    $('#rule').addClass('d-none');
+	}
+});
+
+
+
+$('#rule-finish').on('change', function() {
+	if ($(this).find(":checked").val() == 'never') {
+		$('#rule-finish-date').addClass('d-none');
+		$('#rule-finish-cycle').addClass('d-none');
+	} else if ($(this).find(":checked").val() == 'date') {
+		$('#rule-finish-date').removeClass('d-none');
+		$('#rule-finish-cycle').addClass('d-none');
+	} else if ($(this).find(":checked").val() == 'cycle') {
+		 $('#rule-finish-date').addClass('d-none');
+		$('#rule-finish-cycle').removeClass('d-none');
+	}
+});
+
+
+$('#rule-cycle').on('change', function() {
+	if ($(this).find(":checked").val() == 'weekly') {
+    $('#week-days').removeClass('d-none');
+  } else {
+    $('#week-days').addClass('d-none');
+	}
+});
+  
+
+
+// Users
+$('#input-user').autocomplete({
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_status=1&filter_name=' + encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['user_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('#input-user').val('');
+
+        $('#guest-user-' + item['value']).remove();
+
+        html = '<tr id="guest-user-' + item['value'] + '">';
+        html += '  <td>' + item['label'] + '<input type="hidden" name="guest_user[]" value="' + item['value'] + '"/></td>';
+        html += '  <td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+        html += '</tr>';
+
+        $('#guest-user tbody').append(html);
+    }
+});
+
+$('#guest-user').on('click', '.btn', function() {
+    $(this).parent().parent().remove();
+});
+
+// User Groups
+$('#input-user-group').autocomplete({
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=user/user_permission.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['user_group_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('#input-user-group').val('');
+
+        $('#guest-user-group-' + item['value']).remove();
+
+        html = '<tr id="guest-user-group-' + item['value'] + '">';
+        html += '  <td>' + item['label'] + '<input type="hidden" name="guest_user_group[]" value="' + item['value'] + '"/></td>';
+        html += '  <td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+        html += '</tr>';
+
+        $('#guest-user-group tbody').append(html);
+    }
+});
+
+$('#guest-user-group').on('click', '.btn', function() {
+    $(this).parent().parent().remove();
+});
+
+var upload_row = {{ upload_row }};
+
+$('#button-upload-row').on('click', function() {
+
+    html = '<tr id="upload-row-' + upload_row + '">';
+    html += '	<td class="text-start col-sm-10" colspan="2">';
+    html += '		<div class="input-group">';
+    html += '			<button type="button" data-oc-toggle="upload" data-oc-url="{{ upload }}" id="button-upload-' + upload_row + '" data-oc-target="#input-upload-' + upload_row + '" data-oc-target-name="#input-upload-file-' + upload_row + '" data-oc-size-max="{{ config_file_max_size }}" data-oc-size-error="{{ error_upload_size }}" class="btn btn-primary"><i class="fa-solid fa-upload"></i> {{ button_upload }}</button>';
+    html += '			<input type="hidden" name="upload[' + upload_row + ']" value="" id="input-upload-' + upload_row + '"/>';
+    html += '			<input type="text" value="" id="input-upload-file-' + upload_row + '" class="form-control"/>';
+    html += '			<button type="button" data-oc-toggle="download" data-oc-target="#input-upload-' + upload_row + '" disabled class="btn btn-outline-secondary"><i class="fa-solid fa-download"></i> {{ button_download }}</button>';
+    html += '			<button type="button" data-oc-toggle="clear" data-bs-toggle="tooltip" title="{{ button_clear }}" data-oc-target="#input-upload-file-' + upload_row + '" disabled class="btn btn-outline-danger"><i class="fa-solid fa-eraser"></i></button>';
+    html += ' 	</div>';
+    html += '	</td>';
+    html += '</tr>';
+
+$('#upload tbody').append(html);
+
+    upload_row++;
+});
+</script>

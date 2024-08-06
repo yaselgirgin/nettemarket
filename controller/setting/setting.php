@@ -152,10 +152,10 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('tool/image');
 
-		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+		$data['placeholder'] = $this->model_tool_image->resize('placeholder.svg', $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
 
 		if ($data['config_logo'] && is_file(DIR_IMAGE . html_entity_decode($data['config_logo'], ENT_QUOTES, 'UTF-8'))) {
-			$data['logo'] = $this->model_tool_image->resize($data['config_logo'], $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+			$data['logo'] = $this->model_tool_image->resize($data['config_logo'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
 		} else {
 			$data['logo'] = $data['placeholder'];
 		}
