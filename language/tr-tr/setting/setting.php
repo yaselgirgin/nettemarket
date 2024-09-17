@@ -35,6 +35,20 @@ $_['text_listMonth']                      = 'Aylık Liste';
 $_['text_listWeek']                       = 'Haftalık Liste';
 
 
+$_['text_january']                        = 'Ocak';
+$_['text_february']                       = 'Şubat';
+$_['text_march']                          = 'Mart';
+$_['text_april']                          = 'Nisan';
+$_['text_may']                            = 'Mayıs';
+$_['text_june']                           = 'Haziran';
+$_['text_july']                           = 'Temmuz';
+$_['text_august']                         = 'Ağustos';
+$_['text_september']                      = 'Eylül';
+$_['text_october']                        = 'Ekim';
+$_['text_november']                       = 'Kasım';
+$_['text_december']                       = 'Aralık';
+
+
 // Entry
 $_['entry_name']                          = 'Ticari Ünvan';
 $_['entry_owner']                         = 'İşletme Sahibi';
@@ -109,6 +123,8 @@ $_['column_open']                         = 'Açılış';
 $_['column_close']                        = 'Kapanış';
 $_['column_days']                         = 'Günler';
 $_['column_date']                         = 'Tarih';
+$_['column_day']                          = 'Gün';
+$_['column_month']                        = 'Ay';
 $_['column_name']                         = 'Adı';
 
 // Help

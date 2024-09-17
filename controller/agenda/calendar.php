@@ -30,19 +30,49 @@ class Calendar extends \Opencart\System\Engine\Controller {
 		$data['religious_holiday_ramadan'] = $this->config->get('config_religious_holiday_ramadan');
 		
 		$islamic_year = substr($this->fromGregorian(date('Y') , 1, 1), 0, 4);
+		$islamic_next = substr($this->fromGregorian(date('Y')+1 , 1, 1), 0, 4);
+		$islamic_prev = substr($this->fromGregorian(date('Y')-1 , 1, 1), 0, 4);
+		$qurban_prev = $this->toGregorian($islamic_prev , 12, 10, date('Y')-1);
 		$qurban = $this->toGregorian($islamic_year , 12, 10, date('Y'));
+		$qurban_next = $this->toGregorian($islamic_next , 12, 10, date('Y')+1);
+		$ramadan_prev = $this->toGregorian($islamic_prev , 10, 01, date('Y')-1);		
 		$ramadan = $this->toGregorian($islamic_year , 10, 01, date('Y'));
-		
+		$ramadan_next = $this->toGregorian($islamic_next , 10, 01, date('Y')+1);
+				
+		$data['qurban_prev'] = [
+			'title'      		=> $this->language->get('religious_holiday_qurban'),
+			'start_date'    => date('Y-m-d', strtotime($qurban_prev)),
+			'end_date'   		=> date('Y-m-d', strtotime($qurban_prev. ' +4 days')),
+		];
+
 		$data['qurban'] = [
 			'title'      		=> $this->language->get('religious_holiday_qurban'),
 			'start_date'    => date('Y-m-d', strtotime($qurban)),
 			'end_date'   		=> date('Y-m-d', strtotime($qurban. ' +4 days')),
 		];
 		
+		$data['qurban_next'] = [
+			'title'      		=> $this->language->get('religious_holiday_qurban'),
+			'start_date'    => date('Y-m-d', strtotime($qurban_next)),
+			'end_date'   		=> date('Y-m-d', strtotime($qurban_next. ' +4 days')),
+		];
+
+		$data['ramadan_prev'] = [
+			'title'      		=> $this->language->get('religious_holiday_ramadan'),
+			'start_date'    => date('Y-m-d', strtotime($ramadan_prev)),
+			'end_date'   		=> date('Y-m-d', strtotime($ramadan_prev. ' +3 days')),
+		];				
+
 		$data['ramadan'] = [
 			'title'      		=> $this->language->get('religious_holiday_ramadan'),
 			'start_date'    => date('Y-m-d', strtotime($ramadan)),
 			'end_date'   		=> date('Y-m-d', strtotime($ramadan. ' +3 days')),
+		];
+				
+		$data['ramadan_next'] = [
+			'title'      		=> $this->language->get('religious_holiday_ramadan'),
+			'start_date'    => date('Y-m-d', strtotime($ramadan_next)),
+			'end_date'   		=> date('Y-m-d', strtotime($ramadan_next. ' +3 days')),
 		];
 
 		$data['event'] = $this->load->controller('agenda/event.getForm');

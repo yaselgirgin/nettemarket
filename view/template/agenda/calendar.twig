@@ -92,14 +92,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		events: [
 			{% if public_holidays|length > 0 %}
 			{% for public_holiday in public_holidays %}
-			{title: `{{ public_holiday.name }}`,rrule: {dtstart: '{{ public_holiday.date }}',freq: 'yearly',},icon: 'flag',display: 'background',backgroundColor	: '#ff9f89'},
+			{title: `{{ public_holiday.name }}`,rrule: {dtstart: '1970-{{ public_holiday.month }}-{{ public_holiday.day }}',freq: 'yearly',},icon: 'flag',display: 'background',backgroundColor	: '#ff9f89'},
 			{% endfor %}
 			{% endif %}
 			{% if religious_holiday_qurban %}
+			
+			{title: `{{ qurban_prev.title }}`,rrule: {dtstart: '{{ qurban_prev.start_date }}',freq: 'daily',count: '4'},icon: 'cow',display: 'background',backgroundColor	: '#ff9f89'},
 			{title: `{{ qurban.title }}`,rrule: {dtstart: '{{ qurban.start_date }}',freq: 'daily',count: '4'},icon: 'cow',display: 'background',backgroundColor	: '#ff9f89'},
+			{title: `{{ qurban_next.title }}`,rrule: {dtstart: '{{ qurban_next.start_date }}',freq: 'daily',count: '4'},icon: 'cow',display: 'background',backgroundColor	: '#ff9f89'},
+
 			{% endif %}
 			{% if religious_holiday_ramadan %}
+			{title: `{{ ramadan_prev.title }}`,rrule: {dtstart: '{{ ramadan_prev.start_date }}',freq: 'daily',count: '3'},icon: 'moon',display: 'background',backgroundColor	: '#ff9f89'},
 			{title: `{{ ramadan.title }}`,rrule: {dtstart: '{{ ramadan.start_date }}',freq: 'daily',count: '3'},icon: 'moon',display: 'background',backgroundColor	: '#ff9f89'},
+			{title: `{{ ramadan_next.title }}`,rrule: {dtstart: '{{ ramadan_next.start_date }}',freq: 'daily',count: '3'},icon: 'moon',display: 'background',backgroundColor	: '#ff9f89'},
 			{% endif %}
 
 

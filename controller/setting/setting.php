@@ -73,6 +73,56 @@ class Setting extends \Opencart\System\Engine\Controller {
 			];
 		}
 
+		$data['months'] = array(
+			'01' => $this->language->get('text_january'), 
+			'02' => $this->language->get('text_february'), 
+			'03' => $this->language->get('text_march'), 
+			'04' => $this->language->get('text_april'), 
+			'05' => $this->language->get('text_may'), 
+			'06' => $this->language->get('text_june'), 
+			'07' => $this->language->get('text_july'), 
+			'08' => $this->language->get('text_august'), 
+			'09' => $this->language->get('text_september'), 
+			'10' => $this->language->get('text_october'), 
+			'11' => $this->language->get('text_november'), 
+			'12' => $this->language->get('text_december')
+		);
+
+		
+		$data['days'] = array(
+			'01' => '01', 
+			'02' => '02', 
+			'03' => '03', 
+			'04' => '04', 
+			'05' => '05', 
+			'06' => '06', 
+			'07' => '07', 
+			'08' => '08', 
+			'09' => '09', 
+			'10' => '10', 
+			'11' => '11', 
+			'12' => '12', 
+			'13' => '13', 
+			'14' => '14', 
+			'15' => '15', 
+			'16' => '16', 
+			'17' => '17', 
+			'18' => '18', 
+			'19' => '19', 
+			'20' => '20', 
+			'21' => '21', 
+			'22' => '22', 
+			'23' => '23', 
+			'24' => '24', 
+			'25' => '25', 
+			'26' => '26', 
+			'27' => '27', 
+			'28' => '28', 
+			'29' => '29', 
+			'30' => '30', 
+			'31' => '31'
+		);
+
 		// Language
 		$this->load->model('localisation/language');
 

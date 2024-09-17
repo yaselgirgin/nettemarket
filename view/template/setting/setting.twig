@@ -315,7 +315,8 @@
                             <table id="public-holidays" class="table table-hover">
                               <thead>
                                 <tr>
-                                  <td class="text-start col-sm-2">{{ column_date }}</td>
+                                  <td class="text-start col-sm-1">{{ column_day }}</td>
+                                  <td class="text-start col-sm-2">{{ column_month }}</td>
                                   <td class="text-start col-sm-10">{{ column_name }}</td>
                                   <td class="col-sm-1"></td>
                                 </tr>
@@ -324,7 +325,20 @@
                                 {% set public_holiday_row = 0 %}
                                 {% for public_holiday in config_public_holidays %}
                                   <tr id="public-holidays-row-{{ public_holiday_row }}">
-                                    <td class="text-start col-sm-2"><input type="date" name="config_public_holidays[{{ public_holiday_row }}][date]" value="{{ public_holiday.date }}" class="form-control"/></td>
+                                    <td class="text-start col-sm-1">
+                                      <select name="config_public_holidays[{{ public_holiday_row }}][day]" class="form-select">
+                                        {% for day, day_num in days %}
+                                          <option value="{{ day }}"{% if day == public_holiday.day %} selected{% endif %}>{{ day_num }}</option>
+                                        {% endfor %}
+                                      </select>
+                                    </td>
+                                    <td class="text-start col-sm-2">
+                                      <select name="config_public_holidays[{{ public_holiday_row }}][month]" class="form-select">
+                                        {% for month, mount_name in months %}
+                                          <option value="{{ month }}"{% if month == public_holiday.month %} selected{% endif %}>{{ mount_name }}</option>
+                                        {% endfor %}
+                                      </select>
+                                    </td>
                                     <td class="text-start col-sm-10"><input type="text" name="config_public_holidays[{{ public_holiday_row }}][name]" value="{{ public_holiday.name }}" class="form-control"/></td>
                                     <td class="text-end"><button type="button" onclick="$('#public-holidays-row-{{ public_holiday_row }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
                                   </tr>
@@ -333,7 +347,7 @@
                               </tbody>
                               <tfoot>
                                 <tr>
-                                  <td colspan="2"><div class="form-text">{{ help_public_holidays }}</div></td>
+                                  <td colspan="3"><div class="form-text">{{ help_public_holidays }}</div></td>
                                   <td class="text-end"><button type="button" id="button-public-holidays-row" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
                                 </tr>
                               </tfoot>
@@ -904,7 +918,6 @@ $('#button-hours-row').on('click', function() {
     html += '</tr>';
 
 $('#open-hours tbody').append(html);
-
     hours_row++;
 });
 
@@ -914,7 +927,16 @@ var public_holiday_row = {{ public_holiday_row }};
 $('#button-public-holidays-row').on('click', function() {
 
     html = '<tr id="public-holidays-row-' + public_holiday_row + '">';
-    html += '  <td class="text-start"><input type="date" name="config_public_holidays[' + public_holiday_row + '][date]" value="" class="form-control"/></td>';
+    html += '  <td class="text-start"><select name="config_public_holidays[' + public_holiday_row + '][day]" class="form-select">';
+    {% for day, day_num in days %}
+    html += '   <option value="{{ day }}">{{ day_num }}</option>';
+    {% endfor %}
+    html += '   </select></td>'; 
+    html += '  <td class="text-start"><select name="config_public_holidays[' + public_holiday_row + '][month]" class="form-select">';
+    {% for month, mount_name in months %}
+    html += '   <option value="{{ month }}">{{ mount_name }}</option>';
+    {% endfor %}
+    html += '   </select></td>';    
     html += '  <td class="text-start"><input type="text" name="config_public_holidays[' + public_holiday_row + '][name]" value="" class="form-control"/></td>';
     html += '  <td class="text-end"><button type="button" onclick="$(\'#public-holidays-row-' + public_holiday_row + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove|escape('js') }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
     html += '</tr>';
