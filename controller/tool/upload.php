@@ -146,7 +146,7 @@ class Upload extends \Opencart\System\Engine\Controller {
 				'upload_id'  => $result['upload_id'],
 				'name'       => $result['name'],
 				'code'       => $result['code'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added'])),
 				'download'   => $this->url->link('tool/upload.download', 'user_token=' . $this->session->data['user_token'] . '&code=' . $result['code'] . $url)
 			];
 		}
@@ -249,8 +249,8 @@ class Upload extends \Opencart\System\Engine\Controller {
 				// Remove file before deleting DB record.
 				$upload_info = $this->model_tool_upload->getUpload($upload_id);
 
-				if ($upload_info && is_file(DIR_UPLOAD . $upload_info['filename'])) {
-					unlink(DIR_UPLOAD . $upload_info['filename']);
+				if ($upload_info && is_file(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename'])) {
+					unlink(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename']);
 				}
 
 				$this->model_tool_upload->deleteUpload($upload_id);
@@ -282,7 +282,7 @@ class Upload extends \Opencart\System\Engine\Controller {
 		$upload_info = $this->model_tool_upload->getUploadByCode($code);
 
 		if ($upload_info) {
-			$file = DIR_UPLOAD . $upload_info['filename'];
+			$file = DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename'];
 			$mask = basename($upload_info['name']);
 
 			if (!headers_sent()) {
@@ -383,8 +383,21 @@ class Upload extends \Opencart\System\Engine\Controller {
 
 		if (!$json) {
 			$file = $filename . '.' . oc_token(32);
+			
+			if (!is_dir(DIR_UPLOAD . date('Y') . '/')) {
+				mkdir(DIR_UPLOAD . date('Y') . '/', 0755);
+			}
 
-			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
+			if (!is_dir(DIR_UPLOAD . date('Y') . '/' . date('m') . '/')) {
+				mkdir(DIR_UPLOAD . date('Y') . '/' . date('m') . '/', 0755);
+			}
+
+			if (!is_dir(DIR_UPLOAD . date('Y') . '/' . date('m') . '/' . date('d') . '/')) {
+				mkdir(DIR_UPLOAD . date('Y') . '/' . date('m') . '/' . date('d') . '/', 0755);
+			}
+				
+
+			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . date('Y') . '/' . date('m') . '/' . date('d') . '/' . $file);
 
 			// Hide the uploaded file name so people cannot link to it directly.
 			$this->load->model('tool/upload');

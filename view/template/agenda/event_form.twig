@@ -8,8 +8,8 @@
 			<div class="modal-body">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a href="#tab-general" data-bs-toggle="tab" class="nav-link active">Genel</a></li>
-					<li class="nav-item d-none" id="rule"><a href="#tab-rule" data-bs-toggle="tab" class="nav-link">Tekrar</a></li>
-					<li class="nav-item"><a href="#tab-guest" data-bs-toggle="tab" class="nav-link">Davetliler</a></li>
+					<li class="nav-item"><a href="#tab-recurrence" data-bs-toggle="tab" class="nav-link">Tekrarlama</a></li>
+					<li class="nav-item"><a href="#tab-participants" data-bs-toggle="tab" class="nav-link">Katılımıclar</a></li>
 					<li class="nav-item"><a href="#tab-attach" data-bs-toggle="tab" class="nav-link">Ekler</a></li>
 					<li class="nav-item"><a href="#tab-related" data-bs-toggle="tab" class="nav-link">Bağlantılar</a></li>
 				</ul>
@@ -29,7 +29,7 @@
 						</div>
 						<div class="row mb-2">
 							<legend class="col-sm-2 col-form-label">Kategori</legend>
-							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+							<div class="col-lg-3 col-sm-6 mt-2 mt-lg-0 mt-sm-0">
 								<select name="category" class="form-select">
 									<option value=""></option>
 									<option value="receipt">Tahsilat</option>
@@ -55,15 +55,12 @@
 								<input type="radio" name="data_type" class="btn-check" id="data-type-task">
 								<label class="btn btn-outline-primary" for="data-type-task"><i class="far fa-circle-check"></i> Görev</label>
 							</div>
-							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
-								<select name="freq" class="form-select" id="freq">
-									<option value="never">Tekrarlanmaz</option>
-									<option value="daily">Her Gün</option>
-									<option value="weekly">Her Hafta</option>
-									<option value="monthly">Her Ay</option>
-									<option value="yearly">Her Yıl</option>
-									<option value="new_rule">Özel Tekrar</option>
-								</select>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0 pt-sm-2">
+								<div class="form-check form-switch">
+									<input type="hidden" value="0"/>
+									<input class="form-check-input" type="checkbox" name="all_day" value="1" id="all-day" checked/>
+									<label class="form-check-label" for="all-day">Tüm Gün</label>
+								</div>
 							</div>
 						</div>
 						<div class="row mb-2">
@@ -85,66 +82,206 @@
 							</div>
 						</div>
 						<div class="row mb-2">
-							<label for="all-day" class="col-sm-2 col-form-label">Tüm Gün</label>
-							<div class="col-lg-3 col-sm-4">
-								<div class="form-check form-switch form-switch-lg">
-									<input type="hidden" value="0"/>
-									<input type="checkbox" name="all_day" value="1" id="all-day" class="form-check-input" checked/>
+							<legend class="col-sm-2 col-form-label">Hatırlatma</legend>
+							<div class="col-lg-3 col-sm-6 mt-2 mt-lg-0 mt-sm-0">
+								<select name="reminder" class="form-select">
+									<option value="">Yok</option>
+									<option value="mail">E-posta</option>
+									<option value="sms">Sms</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div id="tab-recurrence" class="tab-pane">
+						<div class="row mb-2">
+							<legend class="col-sm-2 col-form-label">Tekrar</legend>
+							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0">
+								<select name="freq" class="form-select" id="freq">
+									<option value="never">Yok</option>
+									<option value="daily">Her Gün</option>
+									<option value="weekly">Her Hafta</option>
+									<option value="monthly">Her Ay</option>
+									<option value="yearly">Her Yıl</option>
+									<option value="new_recurrence">Özel Tekrar</option>
+								</select>
+							</div>
+						</div>
+						<div class="d-none" id="recurrence">
+							<div class="row mb-2">
+								<legend class="col-sm-2 col-form-label">Tekrar Aralığı</legend>
+								<div class="col-lg-2 col-sm-3">
+									<input type="number" name="recurrence_count" value="1" min="1" class="form-control">
+								</div>
+								<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0">
+									<select name="recurrence_cycle" class="form-select" id="recurrence-cycle">
+										<option value="daily">Gün</option>
+										<option value="weekly">Hafta</option>
+										<option value="monthly">Ay</option>
+										<option value="yearly">Yıl</option>
+									</select>
+								</div>
+								<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0 pt-sm-2">
+									<div class="form-check form-switch d-none" id="month-days-each">
+										<input type="hidden" value="0"/>
+										<input class="form-check-input" type="checkbox" name="month_days_each_checkbox" value="1" id="month-days-each-checkbox" checked/>
+										<label class="form-check-label" for="month-days-each-checkbox">Sabit</label>
+									</div>
+								</div>
+							</div>
+							<div class="row mb-2 d-none" id="week-days">
+								<div class="col-sm-10 offset-sm-2">
+									<input type="checkbox" name="week_day_1" class="btn-check" id="btn-wd1" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd1">Pt</label>
+									<input type="checkbox" name="week_day_2" class="btn-check" id="btn-wd2" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd2">Sl</label>
+									<input type="checkbox" name="week_day_3" class="btn-check" id="btn-wd3" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd3">Çr</label>
+									<input type="checkbox" name="week_day_4" class="btn-check" id="btn-wd4" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd4">Pr</label>
+									<input type="checkbox" name="week_day_5" class="btn-check" id="btn-wd5" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd5">Cu</label>
+									<input type="checkbox" name="week_day_6" class="btn-check" id="btn-wd6" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd6">Ct</label>
+									<input type="checkbox" name="week_day_7" class="btn-check" id="btn-wd7" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btn-wd7">Pz</label>
+								</div>
+							</div>
+							<div class="row mb-2 d-none" id="months">
+								<div class="col-sm-10 offset-sm-2">
+									<input type="checkbox" name="month_1" class="btn-check" id="btn-m1" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m1">Ocak</label>
+									<input type="checkbox" name="month_2" class="btn-check" id="btn-m2" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m2">Şubat</label>
+									<input type="checkbox" name="month_3" class="btn-check" id="btn-m3" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m3">Mart</label>
+									<input type="checkbox" name="month_4" class="btn-check" id="btn-m4" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m4">Nisan</label>
+									<input type="checkbox" name="month_5" class="btn-check" id="btn-m5" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m5">Mayıs</label>
+									<input type="checkbox" name="month_6" class="btn-check" id="btn-m6" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m6">Haziran</label>
+									<input type="checkbox" name="month_7" class="btn-check" id="btn-m7" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m7">Temmuz</label>
+									<input type="checkbox" name="month_8" class="btn-check" id="btn-m8" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m8">Ağustos</label>
+									<input type="checkbox" name="month_9" class="btn-check" id="btn-m9" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m9">Eylül</label>
+									<input type="checkbox" name="month_10" class="btn-check" id="btn-m10" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m10">Ekim</label>
+									<input type="checkbox" name="month_11" class="btn-check" id="btn-m11" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m11">Kasım</label>
+									<input type="checkbox" name="month_12" class="btn-check" id="btn-m12" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-m12">Aralık</label>
+									
+								</div>
+							</div>
+							<div class="row mb-2 d-none" id="days-each">
+								<div class="col-sm-10 offset-sm-2">
+									<input type="checkbox" name="month_day_1" class="btn-check" id="btn-md1" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md1">01</label>
+									<input type="checkbox" name="month_day_2" class="btn-check" id="btn-md2" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md2">02</label>
+									<input type="checkbox" name="month_day_3" class="btn-check" id="btn-md3" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md3">03</label>
+									<input type="checkbox" name="month_day_4" class="btn-check" id="btn-md4" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md4">04</label>
+									<input type="checkbox" name="month_day_5" class="btn-check" id="btn-md5" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md5">05</label>
+									<input type="checkbox" name="month_day_6" class="btn-check" id="btn-md6" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md6">06</label>
+									<input type="checkbox" name="month_day_7" class="btn-check" id="btn-md7" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md7">07</label>
+									<input type="checkbox" name="month_day_8" class="btn-check" id="btn-md8" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md8">08</label>
+									<input type="checkbox" name="month_day_9" class="btn-check" id="btn-md9" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md9">09</label>
+									<input type="checkbox" name="month_day_10" class="btn-check" id="btn-md10" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md10">10</label>
+									<input type="checkbox" name="month_day_11" class="btn-check" id="btn-md11" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md11">11</label>
+									<input type="checkbox" name="month_day_12" class="btn-check" id="btn-md12" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md12">12</label>
+									<input type="checkbox" name="month_day_13" class="btn-check" id="btn-md13" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md13">13</label>
+									<input type="checkbox" name="month_day_14" class="btn-check" id="btn-md14" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md14">14</label>
+									<input type="checkbox" name="month_day_15" class="btn-check" id="btn-md15" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md15">15</label>
+									<input type="checkbox" name="month_day_16" class="btn-check" id="btn-md16" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md16">16</label>
+									<input type="checkbox" name="month_day_17" class="btn-check" id="btn-md17" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md17">17</label>
+									<input type="checkbox" name="month_day_18" class="btn-check" id="btn-md18" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md18">18</label>
+									<input type="checkbox" name="month_day_19" class="btn-check" id="btn-md19" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md19">19</label>
+									<input type="checkbox" name="month_day_20" class="btn-check" id="btn-md20" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md20">20</label>
+									<input type="checkbox" name="month_day_21" class="btn-check" id="btn-md21" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md21">21</label>
+									<input type="checkbox" name="month_day_22" class="btn-check" id="btn-md22" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md22">22</label>
+									<input type="checkbox" name="month_day_23" class="btn-check" id="btn-md23" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md23">23</label>
+									<input type="checkbox" name="month_day_24" class="btn-check" id="btn-md24" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md24">24</label>
+									<input type="checkbox" name="month_day_25" class="btn-check" id="btn-md25" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md25">25</label>
+									<input type="checkbox" name="month_day_26" class="btn-check" id="btn-md26" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md26">26</label>
+									<input type="checkbox" name="month_day_27" class="btn-check" id="btn-md27" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md27">27</label>
+									<input type="checkbox" name="month_day_28" class="btn-check" id="btn-md28" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md28">28</label>
+									<input type="checkbox" name="month_day_29" class="btn-check" id="btn-md29" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md29">29</label>
+									<input type="checkbox" name="month_day_30" class="btn-check" id="btn-md30" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md30">30</label>
+									<input type="checkbox" name="month_day_31" class="btn-check" id="btn-md31" autocomplete="off">
+									<label class="btn btn-outline-primary mb-1" for="btn-md31">31</label>
+								</div>
+							</div>
+							<div class="row mb-2 d-none" id="days-every">
+								<div class="col-lg-2 col-sm-3 offset-sm-2 mt-2 mt-lg-0 mt-sm-0">
+									<select name="days_prefix" class="form-select">
+										<option value="first">İlk</option>
+										<option value="second">İkinci</option>
+										<option value="third">Üçüncü</option>
+										<option value="fourth">Dördüncü</option>
+										<option value="last">Son</option>
+									</select>
+								</div>
+								<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0">
+									<select name="days_name" class="form-select">
+										<option value="1">Pazartesi</option>
+										<option value="2">Salı</option>
+										<option value="3">Çarşamba</option>
+										<option value="4">Perşembe</option>
+										<option value="5">Cuma</option>
+										<option value="6">Cumartesi</option>
+										<option value="7">Pazar</option>
+									</select>
+								</div>
+							</div>
+							<div class="row mb-2">
+								<legend class="col-sm-2 col-form-label">Bitiş</legend>
+								<div class="col-lg-4 col-sm-6 mt-2 mt-lg-0 mt-sm-0">
+									<select name="recurrence_finish" class="form-select" id="recurrence-finish">
+										<option value="never">Hiçbir zaman</option>
+										<option value="date">Şu tarihte</option>
+										<option value="cycle">Tekrar Sayısı</option>
+									</select>
+								</div>
+								<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0 d-none" id="recurrence-finish-date">
+									<input type="date" name="recurrence_finish_date" class="form-control">
+								</div>
+								<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0 d-none" id="recurrence-finish-cycle">
+									<input type="number" name="recurrence_finish_cycle" value="1" min="1" class="form-control">
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="tab-rule" class="tab-pane">
-						<div class="row mb-2">
-							<legend class="col-sm-2 col-form-label">Tekrar Aralığı</legend>
-							<div class="col-lg-2 col-sm-3">
-								<input type="number" name="rule_count" value="1" min="1" class="form-control">
-							</div>
-							<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0">
-								<select name="rule_cycle" class="form-select" id="rule-cycle">
-									<option value="daily">Gün</option>
-									<option value="weekly">Hafta</option>
-									<option value="monthly">Ay</option>
-									<option value="yearly">Yıl</option>
-								</select>
-							</div>
-						</div>
-						<div class="row mb-2 d-none" id="week-days">
-							<div class="col-sm-10 offset-sm-2">
-								<input type="checkbox" name="rule_week_day_1" class="btn-check" id="btn-d1" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d1">Pt</label>
-								<input type="checkbox" name="rule_week_day_2" class="btn-check" id="btn-d2" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d2">Sl</label>
-								<input type="checkbox" name="rule_week_day_3" class="btn-check" id="btn-d3" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d3">Çr</label>
-								<input type="checkbox" name="rule_week_day_4" class="btn-check" id="btn-d4" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d4">Pr</label>
-								<input type="checkbox" name="rule_week_day_5" class="btn-check" id="btn-d5" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d5">Cu</label>
-								<input type="checkbox" name="rule_week_day_6" class="btn-check" id="btn-d6" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d6">Ct</label>
-								<input type="checkbox" name="rule_week_day_7" class="btn-check" id="btn-d7" autocomplete="off">
-								<label class="btn btn-outline-primary" for="btn-d7">Pz</label>
-							</div>
-						</div>
-						<div class="row mb-2">
-							<legend class="col-sm-2 col-form-label">Bitiş</legend>
-							<div class="col-lg-4 col-sm-6 mt-2 mt-lg-0 mt-sm-0">
-								<select name="rule_finish" class="form-select" id="rule-finish">
-									<option value="never">Hiçbir zaman</option>
-									<option value="date">Şu tarihte</option>
-									<option value="cycle">Tekrar Sayısı</option>
-								</select>
-							</div>
-							<div class="col-lg-3 col-sm-4 mt-2 mt-lg-0 mt-sm-0 d-none" id="rule-finish-date">
-								<input type="date" name="rule_finish_date" class="form-control">
-							</div>
-							<div class="col-lg-2 col-sm-3 mt-2 mt-lg-0 mt-sm-0 d-none" id="rule-finish-cycle">
-								<input type="number" name="rule_finish_cycle" value="1" min="1" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div id="tab-guest" class="tab-pane">
+					<div id="tab-participants" class="tab-pane">
 						<div class="row mb-2">
 							<label for="input-user" class="col-sm-2 col-form-label">Kullanıcı Ekle</label>
 							<div class="col-sm-10">
@@ -152,11 +289,11 @@
 								<ul id="autocomplete-user" class="dropdown-menu"></ul>
 								<div class="input-group">
 									<div class="form-control p-0" style="height: 115px; overflow: auto;">
-										<table id="guest-user" class="table m-0">
+										<table id="participants-user" class="table m-0">
 											<tbody>
-												{% for guest_user in guest_users %}
-													<tr id="guest-user-{{ guest_user.user_id }}">
-														<td>{{ guest_user.name }}<input type="hidden" name="guest_user[]" value="{{ guest_user.user_id }}"/></td>
+												{% for participant_user in participant_users %}
+													<tr id="participant-user-{{ participant_user.user_id }}">
+														<td>{{ participant_user.name }}<input type="hidden" name="participant_user[]" value="{{ participant_user.user_id }}"/></td>
 														<td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
 													</tr>
 												{% endfor %}
@@ -174,11 +311,11 @@
 								<ul id="autocomplete-user-group" class="dropdown-menu"></ul>
 								<div class="input-group">
 									<div class="form-control p-0" style="height: 115px; overflow: auto;">
-										<table id="guest-user-group" class="table m-0">
+										<table id="participants-user-group" class="table m-0">
 											<tbody>
-												{% for guest_user_group in guest_user_groups %}
-													<tr id="guest-user-group-{{ guest_user_group.group_id }}">
-														<td>{{ guest_user_group.name }}<input type="hidden" name="guest_user_group[]" value="{{ guest_user_group.group_id }}"/></td>
+												{% for participant_user_group in participant_user_groups %}
+													<tr id="participant-user-group-{{ participant_user_group.group_id }}">
+														<td>{{ participant_user_group.name }}<input type="hidden" name="participant_user_group[]" value="{{ participant_user_group.group_id }}"/></td>
 														<td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
 													</tr>
 												{% endfor %}
@@ -274,38 +411,64 @@ $('#data-type-event').on('click', function() {
 });
 
 $('#freq').on('change', function() {
-	if ($(this).find(":checked").val() == 'new_rule') {
-    $('#rule').removeClass('d-none');
-	 	$('[href="#tab-rule"]').tab('show');
+	if ($(this).find(":checked").val() == 'new_recurrence') {
+    $('#recurrence').removeClass('d-none');
+	 	$('[href="#tab-recurrence"]').tab('show');
   } else {
-    $('#rule').addClass('d-none');
+    $('#recurrence').addClass('d-none');
 	}
 });
 
-
-
-$('#rule-finish').on('change', function() {
+$('#recurrence-finish').on('change', function() {
 	if ($(this).find(":checked").val() == 'never') {
-		$('#rule-finish-date').addClass('d-none');
-		$('#rule-finish-cycle').addClass('d-none');
+		$('#recurrence-finish-date').addClass('d-none');
+		$('#recurrence-finish-cycle').addClass('d-none');
 	} else if ($(this).find(":checked").val() == 'date') {
-		$('#rule-finish-date').removeClass('d-none');
-		$('#rule-finish-cycle').addClass('d-none');
+		$('#recurrence-finish-date').removeClass('d-none');
+		$('#recurrence-finish-cycle').addClass('d-none');
 	} else if ($(this).find(":checked").val() == 'cycle') {
-		 $('#rule-finish-date').addClass('d-none');
-		$('#rule-finish-cycle').removeClass('d-none');
+		 $('#recurrence-finish-date').addClass('d-none');
+		$('#recurrence-finish-cycle').removeClass('d-none');
 	}
 });
 
-
-$('#rule-cycle').on('change', function() {
+$('#recurrence-cycle').on('change', function() {
 	if ($(this).find(":checked").val() == 'weekly') {
     $('#week-days').removeClass('d-none');
   } else {
     $('#week-days').addClass('d-none');
 	}
+
+	if ($(this).find(":checked").val() == 'monthly') {
+    $('#days-each').removeClass('d-none');
+		$('#days-every').addClass('d-none');
+    $('#month-days-each').removeClass('d-none');
+		$('#month-days-each-checkbox').prop('checked', true);
+  } else {
+    $('#days-each').addClass('d-none');
+		$('#days-every').addClass('d-none');
+		$('#month-days-each').addClass('d-none');		
+	}
+	
+	if ($(this).find(":checked").val() == 'yearly') {
+		$('#months').removeClass('d-none');
+		$('#days-every').removeClass('d-none');
+  } else {
+		$('#days-every').addClass('d-none');
+		$('#months').addClass('d-none');
+	}
 });
-  
+
+$('#month-days-each-checkbox').on('click', function() {
+	if (this.checked) {
+		$('#days-each').removeClass('d-none');
+		$('#days-every').addClass('d-none');
+  } else {
+		 $('#days-each').addClass('d-none');
+		 $('#days-every').removeClass('d-none');
+	}
+});
+
 
 
 // Users
@@ -327,18 +490,18 @@ $('#input-user').autocomplete({
     'select': function(item) {
         $('#input-user').val('');
 
-        $('#guest-user-' + item['value']).remove();
+        $('#participant-user-' + item['value']).remove();
 
-        html = '<tr id="guest-user-' + item['value'] + '">';
-        html += '  <td>' + item['label'] + '<input type="hidden" name="guest_user[]" value="' + item['value'] + '"/></td>';
+        html = '<tr id="participant-user-' + item['value'] + '">';
+        html += '  <td>' + item['label'] + '<input type="hidden" name="participant_user[]" value="' + item['value'] + '"/></td>';
         html += '  <td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
         html += '</tr>';
 
-        $('#guest-user tbody').append(html);
+        $('#participants-user tbody').append(html);
     }
 });
 
-$('#guest-user').on('click', '.btn', function() {
+$('#participants-user').on('click', '.btn', function() {
     $(this).parent().parent().remove();
 });
 
@@ -361,18 +524,18 @@ $('#input-user-group').autocomplete({
     'select': function(item) {
         $('#input-user-group').val('');
 
-        $('#guest-user-group-' + item['value']).remove();
+        $('#participant-user-group-' + item['value']).remove();
 
-        html = '<tr id="guest-user-group-' + item['value'] + '">';
-        html += '  <td>' + item['label'] + '<input type="hidden" name="guest_user_group[]" value="' + item['value'] + '"/></td>';
+        html = '<tr id="participant-user-group-' + item['value'] + '">';
+        html += '  <td>' + item['label'] + '<input type="hidden" name="participant_user_group[]" value="' + item['value'] + '"/></td>';
         html += '  <td class="text-end"><button type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
         html += '</tr>';
 
-        $('#guest-user-group tbody').append(html);
+        $('#participants-user-group tbody').append(html);
     }
 });
 
-$('#guest-user-group').on('click', '.btn', function() {
+$('#participants-user-group').on('click', '.btn', function() {
     $(this).parent().parent().remove();
 });
 
