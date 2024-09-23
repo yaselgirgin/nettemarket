@@ -42,6 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			right: 'dayGridMonth,dayGridWeek,timeGridDay,listMonth'
 		},
 		initialView: '{{ config_calendar_view }}',
+		//initialView: 'multiMonthYear',
+  	//multiMonthMaxColumns: 4,
+		//aspectRatio: 2.8,
+		//contentHeight: 650,
+		stickyHeaderDates: true,
 		editable: true,
 		selectable: true,
 		dayMaxEvents: true, // allow "more" link when too many events
@@ -138,8 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			},
 			{
 				title: 'Zaman Aralıklı etkinlik',
-				start: '2024-07-17T15:30:00',
-				end: '2024-07-18T09:30:00',
+				start: '2024-09-23T15:30:00',
+				end: '2024-09-25T09:30:00',
 				icon: 'envelope',
 			},
 			/*
