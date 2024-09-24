@@ -334,20 +334,13 @@
 								<div class="table-responsive">
 									<table id="upload" class="table table-hover">
 										<tbody>
-											{% set upload_row = 0 %}
 											{% for upload in uploads %}
-												<tr id="upload-row-{{ upload_row }}">
-													<td class="text-start col-sm-10" colspan="2">
-														<div class="input-group">
-															<button type="button" data-oc-toggle="upload" data-oc-url=" " id="button-upload-{{ upload_row }}" data-oc-target="#input-upload-{{ upload_row }}" data-oc-target-name="#input-upload-file-{{ upload_row }}" data-oc-size-max="{{ config_file_max_size }}" data-oc-size-error="{{ error_upload_size }}" class="btn btn-primary"><i class="fa-solid fa-upload"></i> {{ button_upload }}</button>
-															<input type="hidden" name="upload[{{ upload_row }}]" value="" id="input-upload-{{ upload_row }}"/>
-															<input type="text" value="" id="input-upload-file-{{ upload_row }}" class="form-control"/>
-															<button type="button" data-oc-toggle="download" data-oc-target="#input-upload-{{ upload_row }}"{% if not upload[upload_row] %} disabled{% endif %} class="btn btn-outline-secondary"><i class="fa-solid fa-download"></i> {{ button_download }}</button>
-															<button type="button" data-oc-toggle="clear" data-bs-toggle="tooltip" title="{{ button_clear }}" data-oc-target="#input-upload-file-{{ upload_row }}"{% if not upload[upload_row] %} disabled{% endif %} class="btn btn-outline-danger"><i class="fa-solid fa-eraser"></i></button>
-														</div>
-													</td>
-												</tr>
-												{% set upload_row = upload_row + 1 %}
+											<tr>
+												<td>{{ upload[name] }}<input type="hidden" name="upload[]" value="{{ upload[code] }}" id="input-upload-{{ upload[code] }}"/></td>
+												<td class="text-end">
+              						<button type="button" data-oc-toggle="download" data-oc-target="#input-upload-{{ upload[code] }}" data-bs-toggle="tooltip" title="{{ button_download }}" class="btn btn-info"><i class="fa-solid fa-download"></i></button>
+              						<button type="button" data-oc-toggle="remove" data-oc-target="#input-upload-{{ upload[code] }}" data-bs-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></td>
+											</tr>
 											{% endfor %}
 										</tbody>
 										<tfoot>
@@ -553,7 +546,7 @@ $('#button-upload').on('click', function() {
 		$('#form-upload input[name=\'file\']').on('change', function (e) {
         if ((this.files[0].size) > {{ config_file_max_size }}) {
             $(this).val('');
-						$('#tab-attach').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i>{{ error_upload_size }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+						$('#tab-attach').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> {{ error_upload_size }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
         }
     });
 
