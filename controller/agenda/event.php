@@ -38,6 +38,8 @@ class Event extends \Opencart\System\Engine\Controller {
 	 * @return string
 	 */
 	public function getForm(): string {
+		$data['user_id'] = $this->user->getId();
+		
 		// Guest Users
 		$data['guest_users'] = [];
 
@@ -46,8 +48,8 @@ class Event extends \Opencart\System\Engine\Controller {
 
 		$data['upload_row'] = 0;
 		$data['error_upload_size'] = sprintf($this->language->get('error_upload_size'), $this->config->get('config_file_max_size'));
+		$data['help_upload'] = sprintf($this->language->get('allowed_upload_size'), $this->config->get('config_file_max_size'));
 		$data['config_file_max_size'] = ((int)$this->config->get('config_file_max_size') * 1024 * 1024);
-		$data['upload'] = $this->url->link('tool/upload.upload', 'user_token=' . $this->session->data['user_token']);
 
 		$data['user_token'] = $this->session->data['user_token'];
 

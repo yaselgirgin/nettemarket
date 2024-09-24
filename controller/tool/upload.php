@@ -232,31 +232,47 @@ class Upload extends \Opencart\System\Engine\Controller {
 
 		$json = [];
 
-		if (isset($this->request->post['selected'])) {
-			$selected = $this->request->post['selected'];
-		} else {
-			$selected = [];
-		}
-
 		if (!$this->user->hasPermission('modify', 'tool/upload')) {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		if (!$json) {
-			$this->load->model('tool/upload');
+		if (isset($this->request->post['selected'])) {
+			$selected = $this->request->post['selected']; 
 
-			foreach ($selected as $upload_id) {
-				// Remove file before deleting DB record.
-				$upload_info = $this->model_tool_upload->getUpload($upload_id);
+			if (!$json) {
+				$this->load->model('tool/upload');
+
+				foreach ($selected as $upload_id) {
+					// Remove file before deleting DB record.
+					$upload_info = $this->model_tool_upload->getUpload($upload_id);
+
+					if ($upload_info && is_file(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename'])) {
+						unlink(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename']);
+					}
+
+					$this->model_tool_upload->deleteUpload($upload_id);
+				}
+
+				$json['success'] = $this->language->get('text_success');
+			}
+		}
+
+		if (isset($this->request->get['code'])) {
+			$code = $this->request->get['code'];
+
+			if (!$json) {
+				$this->load->model('tool/upload');
+
+				$upload_info = $this->model_tool_upload->getUploadByCode($code);
 
 				if ($upload_info && is_file(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename'])) {
 					unlink(DIR_UPLOAD . date('Y/m/d/', strtotime($upload_info['date_added'])) . $upload_info['filename']);
 				}
+				
+				$this->model_tool_upload->deleteUpload($upload_info['upload_id']);
 
-				$this->model_tool_upload->deleteUpload($upload_id);
+				$json['success'] = $this->language->get('text_success');
 			}
-
-			$json['success'] = $this->language->get('text_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

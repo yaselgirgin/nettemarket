@@ -57,6 +57,7 @@ $_['text_thu']                      = 'Perş';
 $_['text_fri']                      = 'Cuma';
 $_['text_sat']                      = 'C.tesi';
 $_['text_sun']                      = 'Pazar';
+$_['allowed_upload_size']           = 'Not: İzin verilen maksimum dosya boyutu %smb';
 
 // Button
 $_['button_add']                    = 'Ekle';

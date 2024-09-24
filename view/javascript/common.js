@@ -330,6 +330,39 @@ $(document).on('click', '[data-oc-toggle=\'download\']', function (e) {
     }
 });
 
+$(document).on('click', '[data-oc-toggle=\'remove\']', function (e) {
+    var element = this;
+
+    var value = $($(element).attr('data-oc-target')).val();
+
+    if (value != '') {
+        $.ajax({
+            url: 'index.php?route=tool/upload.delete&user_token=' + getURLVar('user_token') + '&code=' + value,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+                //console.log(json);
+
+                if (json['error']) {
+                    //alert(json['error']);
+                    $("#upload").parent().prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                }
+
+                if (json['success']) {
+                    //alert(json['success']);
+                    $("#upload").parent().prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                    $(element).parent().parent().remove();
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+});
+
 $(document).on('click', '[data-oc-toggle=\'clear\']', function () {
     var element = this;
 
